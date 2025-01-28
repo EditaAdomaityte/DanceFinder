@@ -1,0 +1,139 @@
+/* Container for all users */
+.users {
+    padding: 20px;
+    font-family: "Arial", sans-serif;
+    background-color:#ffffff; /* Light background for the whole users section */
+    color: #333; /* Dark color for text */
+  }
+  
+  /* Styling each individual user */
+  .user {
+    border: 1px solid #716969; /* Light border around each user */
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #dededd; /* White background for each user */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s, box-shadow 0.2s ease; /* Add smooth hover effect */
+  }
+  
+  /* Add hover effect for user */
+  .user:hover {
+    transform: translateY(-5px); /* Slightly lift the user on hover */
+    box-shadow: 0 5px 15px rgba(44, 15, 15, 0.1); /* Increase shadow on hover */
+  }
+  
+  /* Styling for the user title */
+  .user-header h3 {
+    font-size: 1em;
+    margin: 0;
+    color: #a89cb6; /* Dark blue-gray color for title */
+    font-weight: bold;
+  }
+  
+  /* Styling for the topic label */
+  .user-topic {
+    margin-top: 10px;
+    color: #45404b; /* Bright blue for topic */
+    font-size: 1em;
+    font-weight: bold;
+  }
+  
+  /* Styling for the likes count */
+  .user-likes {
+    margin-top: 5px;
+    color: #3f202d; /* Red color for likes count to make it stand out */
+    font-size: 0.9em;
+  }
+  
+  /* Optional: Style the main heading */
+  .users h2 {
+    font-size: 2.2em;
+    color: #344556; /* Dark gray-blue for the heading */
+    margin-bottom: 20px;
+    text-align: left; /* Center the main heading */
+  }
+  
+  /* Optional: Add some padding around the users */
+  .users .user + .user {
+    border-top: 2px solid #ecf0f1; /* Add a subtle border between users */
+  }
+  
+  /* Container for the filter */
+  .filter {
+    display: flex;
+    flex-direction: row;
+    gap: 20px; /* Space between input and select */
+    padding: 20px;
+    max-width: px; /* Limits the width of the filter */
+    margin: 0 auto; /* Centers the filter */
+    background-color: #3e3345; /* Light background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  /* Styling for the search input */
+  .user-search {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .user-search:focus {
+    border-color: #4c7aaf; /* Green border on focus */
+  }
+  
+  /* Styling for the select dropdown */
+  select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Focus effect for the select dropdown */
+  select:focus {
+    border-color: #4c61af; /* Green border on focus */
+  }
+  
+  /* Styling for the option items */
+  option {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  section.user {
+    margin: 3rem;
+  }
+  
+  .user-info {
+    font-weight: 600;
+    color: #4a5568;
+    min-width: 80px;
+    margin-right: 15px;
+  }
+  
+  .user-footer {
+    margin: 1rem 0 0.25rem 0;
+    font-style: oblique;
+  }
+  
+  .user-header {
+    font-size: larger;
+    font-weight: 700;
+    line-height: 3rem;
+    color: #4a5568;
+  }
+  
+  .btn-container {
+    display: flex;
+    justify-content: flex-end;
+    color: #3f202d;
+  }
+  

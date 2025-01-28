@@ -4,12 +4,22 @@ export const getUserByEmail = (email) => {
   )
 }
 
-export const createUser = (customer) => {
+export const createUser = (user) => {
   return fetch("http://localhost:8088/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(customer),
+    body: JSON.stringify(user),
   }).then((res) => res.json())
+}
+
+export const getAllOrganizers=()=>{
+  return fetch(`http://localhost:8088/users?isOrganizer=true`).then((res) =>
+    res.json()
+  )
+}
+
+export const getUserById = (userId) => {
+  return fetch(`http://localhost:8088/users?id=${userId}&_embed=events`).then((res)=>res.json())
 }
