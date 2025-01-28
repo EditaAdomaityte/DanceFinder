@@ -19,38 +19,55 @@ export const ApplicationViews = (Authorized) => {
   useEffect(() => {
     const user = localStorage.getItem("dance_user");
     const userObj = JSON.parse(user);
-    console.log(userObj);
     setCurrentUser(userObj);
   }, []);
-
+console.log(currentUser)
   return (
     <Routes>
       <Route
         path="/"
         element={
           <>
-            <NavBar />
+            <NavBar currentUser={currentUser}/>
             <Outlet />
           </>
         }
       >
         <Route index element={<Welcome />} />
         <Route path="events">
-          <Route index element={<EventList/>}/>
-          <Route path=":eventId" element={<EventDetails currentUser={currentUser}/>}/>
-          <Route path=":eventId/editevent" element={<EditEventForm currentUser={currentUser}/>}/>
-          <Route path="myevents" element={<MyEvents currentUser={currentUser}/>}/>
+          <Route index element={<EventList />} />
+          <Route
+            path=":eventId"
+            element={<EventDetails currentUser={currentUser} />}
+          />
+          <Route
+            path=":eventId/editevent"
+            element={<EditEventForm currentUser={currentUser} />}
+          />
+          <Route
+            path="myevents"
+            element={<MyEvents currentUser={currentUser} />}
+          />
         </Route>
-        <Route path="newevent" element={<NewEventForm currentUser={currentUser}/>}/>
+        <Route
+          path="newevent"
+          element={<NewEventForm currentUser={currentUser} />}
+        />
         <Route path="profile">
-          <Route index element={<ProfileDetails currentUser={currentUser}/>}/>
-          <Route path=":userId" element={<ProfileDetails currentUser={currentUser}/>}/>
-          <Route path=":userId/editprofile" element={<EditProfileForm currentUser={currentUser}/>}/>
+          <Route index element={<ProfileDetails currentUser={currentUser} />} />
+          <Route
+            path=":userId"
+            element={<ProfileDetails currentUser={currentUser} />}
+          />
+          <Route
+            path=":userId/editprofile"
+            element={<EditProfileForm currentUser={currentUser} />}
+          />
         </Route>
-        <Route path="organizers" element={<OrganizerList />}/>
+        <Route path="organizers" element={<OrganizerList />} />
         <Route path="dances">
-          <Route index element={<DanceList/>}/>
-          <Route path=":danceId" element={<DanceDetails/>}/>
+          <Route index element={<DanceList />} />
+          <Route path=":danceId" element={<DanceDetails />} />
         </Route>
       </Route>
     </Routes>

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import "./Events.css"
 import { getAllEvents } from "../../services/eventServices"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Event } from "./Event"
 
 
 export const MyEvents=({currentUser})=>{
     const [allEvents, setAllEvents]=useState([])
     const [myEvents,setMyEvents]=useState([])
+
 
     useEffect(()=>{
         getAllEvents().then((eventArray)=>{
@@ -22,10 +23,15 @@ export const MyEvents=({currentUser})=>{
     },[allEvents])
     console.log(myEvents)
 
+    const navigate=useNavigate()
+
     return(
         <>
         <div className="events">
             <h2>My Events</h2>
+            <div>
+                <button className="btn btn-create" onClick={()=>{navigate(`/newevent`)}}>Create New Event</button>
+            </div>
             <div>
                 {myEvents.map((event)=>{
                     return(
@@ -35,6 +41,7 @@ export const MyEvents=({currentUser})=>{
                     )
                 })}
             </div>
+            
         </div>
         </>
     )
