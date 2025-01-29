@@ -15,11 +15,11 @@ export const createUser = (user) => {
 }
 
 export const getAllOrganizers=()=>{
-  return fetch(`http://localhost:8088/users?isOrganizer=true`).then((res) =>
+  return fetch(`http://localhost:8088/users?isOrganizer=true&_expand=state`).then((res) =>
     res.json()
   )
 }
 
 export const getUserById = (userId) => {
-  return fetch(`http://localhost:8088/users?id=${userId}&_embed=events`).then((res)=>res.json())
+  return fetch(`http://localhost:8088/users?id=${userId}&_expand=state&_embed=events`).then((res)=>res.json())
 }

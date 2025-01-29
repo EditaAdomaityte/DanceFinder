@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Events.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getEventById } from "../../services/eventServices";
+import { deleteEvent, getEventById } from "../../services/eventServices";
 
 export const EventDetails = ({ currentUser }) => {
   const [event, setEvent] = useState({});
@@ -18,6 +18,12 @@ export const EventDetails = ({ currentUser }) => {
     });
   }, [eventId]);
 
+  const handleDelete=(event)=>{
+    deleteEvent(eventId).then(()=>{
+        navigate("/events/myevents")
+    })
+  }
+
   return (
     <section className="event">
        <header className="event-header">{event.title}</header>
@@ -31,7 +37,7 @@ export const EventDetails = ({ currentUser }) => {
             </div>
             <div>
                 <span className="event-info">Address:</span>
-                {event.address}, {event.city}, {event.state}
+                {event.address}, {event.city}, {event.state?.state_name}
             </div>
             <div>
                 <span className="event-info">Price to attend($):</span>
@@ -56,11 +62,22 @@ export const EventDetails = ({ currentUser }) => {
             <div>
                 <span className="event-info">Type of Dance:</span>
                 <Link to={`/dances/${event.danceType?.id}`}>{event.danceType?.type}</Link>
+               
             </div>
             <div>
                 <span className="event-info">Description:</span>
                 {event.description}
             </div> 
+            <div className="btn-container">
+                {event.user?.id===currentUser.id &&(
+                    <button className="btn btn-edit" onClick={()=>{navigate(`/events/${event.id}/edit`)}}>Edit</button>
+                )}
+                {event.user?.id===currentUser.id &&(
+                    <button className="btn btn-delete" onClick={handleDelete}>Delete</button>
+                )}
+
+                
+            </div>
     </section>
   );
 };

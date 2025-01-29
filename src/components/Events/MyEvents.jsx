@@ -9,7 +9,7 @@ export const MyEvents=({currentUser})=>{
     const [allEvents, setAllEvents]=useState([])
     const [myEvents,setMyEvents]=useState([])
 
-
+    
     useEffect(()=>{
         getAllEvents().then((eventArray)=>{
             setAllEvents(eventArray)
@@ -21,7 +21,6 @@ export const MyEvents=({currentUser})=>{
         )
         setMyEvents(filteredEvents)
     },[allEvents])
-    console.log(myEvents)
 
     const navigate=useNavigate()
 
@@ -35,10 +34,8 @@ export const MyEvents=({currentUser})=>{
             <div>
                 {myEvents.map((event)=>{
                     return(
-                        <Link to ={`/events/${event.id}`} key={event.id}>
-                            <Event event={event}/>
-                        </Link>
-                    )
+                            <Event event={event} currentUser={currentUser}/>
+                        )
                 })}
             </div>
             

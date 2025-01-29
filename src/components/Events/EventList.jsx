@@ -4,7 +4,7 @@ import { getAllEvents } from "../../services/eventServices"
 import { Link } from "react-router-dom"
 import { Event } from "./Event"
 
-export const EventList=()=>{
+export const EventList=({currentUser})=>{
     const [allEvents, setAllEvents]=useState([])
 
     useEffect(()=>{
@@ -13,17 +13,15 @@ export const EventList=()=>{
         })
     },[])
 
+console.log(currentUser)
+
     return(
         <>
         <div className="posts">
             <h2>All Events</h2>
             <div>
                 {allEvents.map((event)=>{
-                    return(
-                        <Link to ={`/events/${event.id}`} key={event.id}>
-                            <Event event={event}/>
-                        </Link>
-                    )
+                    return(<Event event={event} currentUser={currentUser}/>)
                 })}
             </div>
         </div>

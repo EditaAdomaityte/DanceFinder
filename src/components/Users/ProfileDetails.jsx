@@ -27,7 +27,7 @@ export const ProfileDetails=({currentUser})=>{
          </div>
          <div>
              <span className="user-info">State:</span>
-             {user.state}
+             {user.state?.state_name}
          </div>
          <div>
              <span className="user-info">Email:</span>
@@ -37,6 +37,12 @@ export const ProfileDetails=({currentUser})=>{
              <span className="user-info"># of Events:</span>
              {user.events?.length}
          </div> 
+         <div className="btn-container">
+                {user.id===currentUser.id &&(
+                    <button className="btn btn-edit" onClick={()=>{navigate(`/profile/${user.id}/edit`)}}>Edit</button>
+                )}
+                
+            </div>
  </section>
 );
 };

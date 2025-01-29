@@ -19,7 +19,7 @@ export const OrganizerList = () => {
         <div>
           {allOrganizers.map((organizer) => {
             return (
-              <div className="user">
+              <div key={organizer.id} className="user">
                 <div className="header">
                   <Link to={`/profile/${organizer.id}`}><h3>{organizer.name}</h3></Link>
                 </div>
@@ -29,7 +29,7 @@ export const OrganizerList = () => {
                    Cyty: {organizer.city}
                   </div>
                   <div className="user-info">
-                   State: {organizer.state}
+                   State: {organizer.state?.state_name}
                   </div>
                 </div>
               </div>

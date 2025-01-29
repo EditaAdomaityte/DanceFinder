@@ -21,7 +21,7 @@ export const ApplicationViews = (Authorized) => {
     const userObj = JSON.parse(user);
     setCurrentUser(userObj);
   }, []);
-console.log(currentUser)
+
   return (
     <Routes>
       <Route
@@ -35,13 +35,13 @@ console.log(currentUser)
       >
         <Route index element={<Welcome />} />
         <Route path="events">
-          <Route index element={<EventList />} />
+          <Route index element={<EventList currentUser={currentUser}/>} />
           <Route
             path=":eventId"
             element={<EventDetails currentUser={currentUser} />}
           />
           <Route
-            path=":eventId/editevent"
+            path=":eventId/edit"
             element={<EditEventForm currentUser={currentUser} />}
           />
           <Route
@@ -60,7 +60,7 @@ console.log(currentUser)
             element={<ProfileDetails currentUser={currentUser} />}
           />
           <Route
-            path=":userId/editprofile"
+            path=":userId/edit"
             element={<EditProfileForm currentUser={currentUser} />}
           />
         </Route>
