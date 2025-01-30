@@ -2,8 +2,8 @@ export const getAllEvents = () => {
     return fetch("http://localhost:8088/events?_expand=user&_expand=ageRange&_expand=danceType&_expand=state&_embed=attendance").then((res)=>res.json())
 }
 
-export const getEventById = (eventId) => {
-    return fetch(`http://localhost:8088/events?id=${eventId}&_expand=user&_expand=age&_expand=danceType&_expand=sate&_embed=attendance`).then((res)=>res.json())
+export const getEventById = (eventid) => {
+    return fetch(`http://localhost:8088/events?id=${eventid}&_expand=user&_expand=age&_expand=danceType&_expand=sate&_embed=attendance`).then((res)=>res.json())
 }
 
 export const createNewEvent =(newEventObj)=>{
@@ -16,9 +16,9 @@ export const createNewEvent =(newEventObj)=>{
     })
 }
 
-export const deleteEvent = (eventId)=>{
+export const deleteEvent = (eventid)=>{
   
-    return fetch(`http://localhost:8088/events/${eventId}`, {
+    return fetch(`http://localhost:8088/events/${eventIid}`, {
         method: "DELETE",})
   } 
 

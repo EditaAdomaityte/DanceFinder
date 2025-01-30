@@ -1,0 +1,29 @@
+.welcome-container {
+    margin: 2rem auto;
+    width: 70%;
+    text-align: center;
+    padding: 15rem 3rem;
+    border: 1px solid var(--outline);
+    background-image: url(https://images.unsplash.com/photo-1504609813442-a8924e83f76e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-size: cover;
+    border-radius: 0.5rem;
+  }
+  
+  /* This targets any h1 that is a child of an element with the .welcome-container class */
+  .welcome-container > h1 {
+    display: flex;
+    flex-direction: column;
+    color: rgb(249, 248, 248);
+  }
+  
+  /* This targets any div that is a child of an element with the .welcome-container class */
+  .welcome-container > div {
+    font-style: italic;
+    color: beige;
+    size: rem;
+  }
+
+  h1 {
+    font-size: 5em;
+    font-weight: bold;
+}

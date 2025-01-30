@@ -2,26 +2,41 @@ import { useEffect, useState } from "react";
 import "./Events.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteEvent, getEventById } from "../../services/eventServices";
+import { addAttendance } from "../../services/extraServices";
 
 export const EventDetails = ({ currentUser }) => {
   const [event, setEvent] = useState({});
+  const [isAttending, setIsAttending]=useState(false)
 
-  const { eventId } = useParams();
+  const { eventid } = useParams();
   const navigate = useNavigate();
-  console.log(eventId);
+  console.log(event.id);
 
   useEffect(() => {
-    getEventById(eventId).then((data) => {
+    getEventById(eventid).then((data) => {
       const eventObj = data[0];
       console.log(data);
       setEvent(eventObj);
     });
-  }, [eventId]);
+  }, [eventid]);
 
   const handleDelete=(event)=>{
-    deleteEvent(eventId).then(()=>{
+    deleteEvent(eventid).then(()=>{
         navigate("/events/myevents")
     })
+  }
+  const handleIAmIn=(event)=>{
+    const createdAttendance={
+        userId:currentUser.id,
+        eventId: parseInt(eventid)
+    }
+
+    addAttendance(createdAttendance).then(()=>{
+        setIsAttending(true)
+    })
+  }
+  const handleIAmOut=(event)=>{
+    deleteAttendance(currentUser.id,eventid).then(()=>{setIsAttending(false)})
   }
 
   return (
@@ -74,6 +89,13 @@ export const EventDetails = ({ currentUser }) => {
                 )}
                 {event.user?.id===currentUser.id &&(
                     <button className="btn btn-warning" onClick={handleDelete}>Delete</button>
+                )}
+                {currentUser.isOrganizer === false &&!isAttending(
+                    <button className="btn btn-info" onClick={handleIAmIn}>I'm in!</button>
+
+                )}
+                {currentUser.isOrganizer===false&& isAttending(
+                    <button className="btn btn-info" onClick={handleIAmOut}>I'm out!</button>
                 )}
 
                 

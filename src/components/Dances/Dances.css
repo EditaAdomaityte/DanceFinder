@@ -136,4 +136,17 @@
     justify-content: flex-end;
     color: #3f202d;
   }
+
+  .dance img.dance-image {
+    width: 300px;  /* You can adjust the width to your preferred size */
+    height: 300px; /* Ensure the height and width are the same to maintain consistency */
+    object-fit: cover; /* Ensure images fit the given size without distorting */
+    border-radius: 8px; /* Optional: adds rounded corners */
+  }
+  
+  .picture {
+    display: flex;
+    justify-content: flex-end; /* Ensure the image is aligned to the right */
+    flex-grow: 1; /* Allow the content to take up the space and push the image to the right */
+  }
   

@@ -37,11 +37,11 @@ export const ApplicationViews = (Authorized) => {
         <Route path="events">
           <Route index element={<EventList currentUser={currentUser}/>} />
           <Route
-            path=":eventId"
+            path=":eventid"
             element={<EventDetails currentUser={currentUser} />}
           />
           <Route
-            path=":eventId/edit"
+            path=":eventid/edit"
             element={<EditEventForm currentUser={currentUser} />}
           />
           <Route
