@@ -1,7 +1,7 @@
 .navbar {
     display: flex;
     flex-wrap: nowrap;
-    background-color: var(--dark);
+    background-color: rgb(84, 12, 84);
     margin: 0;
     width: 100%;
     padding: 0.5rem;
@@ -25,5 +25,5 @@
   }
 
   .navbar-link:hover {
-    color: var(--primary);
+    color: rgb(100, 60, 60);
   }

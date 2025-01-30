@@ -73,7 +73,7 @@ export const EventDetails = ({ currentUser }) => {
                     <button className="btn btn-edit" onClick={()=>{navigate(`/events/${event.id}/edit`)}}>Edit</button>
                 )}
                 {event.user?.id===currentUser.id &&(
-                    <button className="btn btn-delete" onClick={handleDelete}>Delete</button>
+                    <button className="btn btn-warning" onClick={handleDelete}>Delete</button>
                 )}
 
                 

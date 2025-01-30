@@ -29,12 +29,12 @@ export const MyEvents=({currentUser})=>{
         <div className="events">
             <h2>My Events</h2>
             <div>
-                <button className="btn btn-create" onClick={()=>{navigate(`/newevent`)}}>Create New Event</button>
+                <button className="btn btn-secondary" onClick={()=>{navigate(`/newevent`)}}>Create New Event</button>
             </div>
             <div>
                 {myEvents.map((event)=>{
                     return(
-                            <Event event={event} currentUser={currentUser}/>
+                            <Event key={event.id} event={event} currentUser={currentUser}/>
                         )
                 })}
             </div>

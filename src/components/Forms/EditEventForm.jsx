@@ -54,7 +54,7 @@ export const EditEventForm = ({currentUser}) => {
 
   return (
     <form className="form-group">
-      <h2>New Event</h2>
+      <h2>Edit Event</h2>
       <fieldset>
         <div className="form-group">
           <label>
