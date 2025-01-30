@@ -12,7 +12,7 @@ export const EditEventForm = ({currentUser}) => {
   const [states, setAllStates] = useState([]);
 
   const { eventId } = useParams();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     getEventById(eventId).then((data) => {
