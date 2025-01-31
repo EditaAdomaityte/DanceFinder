@@ -29,6 +29,13 @@ export const DanceDetails = () => {
         <span className="dance-info">Description:</span>
         {dance.description}
       </div>
+      <div className="picture">
+        {dance.picture &&(
+        <img src={dance.picture}
+            alt={dance.type}
+            className="dance-image"/>
+        )}
+      </div>
     </section>
   );
 };

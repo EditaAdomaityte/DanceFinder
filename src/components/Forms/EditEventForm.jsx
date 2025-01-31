@@ -11,11 +11,11 @@ export const EditEventForm = ({currentUser}) => {
   const [allAges, setAllAges] = useState([]);
   const [states, setAllStates] = useState([]);
 
-  const { eventId } = useParams();
+  const { eventid } = useParams();
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    getEventById(eventId).then((data) => {
+    getEventById(eventid).then((data) => {
       const eventObj = data[0];
       setEvent(eventObj);
     });
@@ -48,13 +48,13 @@ export const EditEventForm = ({currentUser}) => {
     };
 
     editEvent(editedEvent).then(() => {
-      navigate(`/events/${eventId}`);
+      navigate(`/events/${eventid}`);
     });
   };
 
   return (
     <form className="form-group">
-      <h2>Edit Event</h2>
+      <h2>Edi Event</h2>
       <fieldset>
         <div className="form-group">
           <label>

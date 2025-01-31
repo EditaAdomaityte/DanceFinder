@@ -13,15 +13,13 @@ export const EventList=({currentUser})=>{
         })
     },[])
 
-console.log(currentUser)
-
     return(
         <>
         <div className="posts">
             <h2>All Events</h2>
             <div>
                 {allEvents.map((event)=>{
-                    return(<Event event={event} currentUser={currentUser}/>)
+                    return(<Event  key={event.id}event={event} currentUser={currentUser}/>)
                 })}
             </div>
         </div>

@@ -1,8 +1,22 @@
 import { Link, useNavigate } from "react-router-dom"
 import "./Events.css"
+import { deleteAttendance } from "../../services/extraServices"
+import { useEffect, useState } from "react"
 
-export const Event=({event,currentUser})=>{
+export const AttendingEvent=({event,currentUser})=>{
     const navigate=useNavigate()
+    const [isAttending, setIsAttending]=useState(false)
+
+    useEffect(() => {
+          // Check if the current user is attending this event
+          const attending =event.attendance?.find((attendance)=>attendance.userId===currentUser.id)
+          setIsAttending(attending)
+        
+      }, [ currentUser]);
+
+    const handleIAmOut=(event)=>{
+        deleteAttendance(isAttending.id).then(()=>{
+            navigate("/events")})}
 
     return(
         <div className="event">
@@ -22,9 +36,9 @@ export const Event=({event,currentUser})=>{
                 </div>
             </div> </Link>
             <div className="btn-container">
-                {event.user?.id===currentUser.id &&(
-                    <button className="btn btn-edit" onClick={()=>{navigate(`/events/${event.id}/edit`)}}>Edit</button>
-                )}
+            
+                    <button className="btn btn-info" onClick={handleIAmOut}>I'm out!</button>
+                
                 
             </div>
         </div>
