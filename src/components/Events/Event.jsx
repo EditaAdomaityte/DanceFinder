@@ -3,7 +3,7 @@ import "./Events.css"
 
 export const Event=({event,currentUser})=>{
     const navigate=useNavigate()
-    console.log(currentUser)
+
     return(
         <div className="event">
             <Link to ={`/events/${event.id}`} key={event.id}>

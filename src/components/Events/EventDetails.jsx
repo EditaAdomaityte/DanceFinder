@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Events.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteEvent, getEventById } from "../../services/eventServices";
-import { addAttendance } from "../../services/extraServices";
+import { addAttendance, deleteAttendance } from "../../services/extraServices";
 
 export const EventDetails = ({ currentUser }) => {
   const [event, setEvent] = useState({});
@@ -10,15 +10,18 @@ export const EventDetails = ({ currentUser }) => {
 
   const { eventid } = useParams();
   const navigate = useNavigate();
-  console.log(event.id);
+ 
 
   useEffect(() => {
     getEventById(eventid).then((data) => {
       const eventObj = data[0];
-      console.log(data);
       setEvent(eventObj);
+
+      // Check if the current user is attending this event
+      const attending =eventObj.attendance?.find((attendance)=>attendance.userId===currentUser.id)
+      setIsAttending(attending)
     });
-  }, [eventid]);
+  }, [eventid, currentUser.id]);
 
   const handleDelete=(event)=>{
     deleteEvent(eventid).then(()=>{
@@ -32,11 +35,13 @@ export const EventDetails = ({ currentUser }) => {
     }
 
     addAttendance(createdAttendance).then(()=>{
-        setIsAttending(true)
-    })
+        setIsAttending(true) }).then(()=>{
+            navigate("/events/myevents")})
   }
+  // Remove the attendance record for the user from the event
   const handleIAmOut=(event)=>{
-    deleteAttendance(currentUser.id,eventid).then(()=>{setIsAttending(false)})
+    deleteAttendance(isAttending.id).then(()=>{setIsAttending(false)}).then(()=>{
+        navigate("/events/myevents")})
   }
 
   return (
@@ -90,11 +95,11 @@ export const EventDetails = ({ currentUser }) => {
                 {event.user?.id===currentUser.id &&(
                     <button className="btn btn-warning" onClick={handleDelete}>Delete</button>
                 )}
-                {currentUser.isOrganizer === false &&!isAttending(
+                {currentUser.isOrganizer === false &&!isAttending &&(
                     <button className="btn btn-info" onClick={handleIAmIn}>I'm in!</button>
 
                 )}
-                {currentUser.isOrganizer===false&& isAttending(
+                {currentUser.isOrganizer===false&& isAttending &&(
                     <button className="btn btn-info" onClick={handleIAmOut}>I'm out!</button>
                 )}
 

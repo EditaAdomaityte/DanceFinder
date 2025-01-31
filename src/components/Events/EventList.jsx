@@ -13,8 +13,6 @@ export const EventList=({currentUser})=>{
         })
     },[])
 
-console.log(currentUser)
-
     return(
         <>
         <div className="posts">

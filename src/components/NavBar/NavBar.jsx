@@ -4,7 +4,6 @@ import "./NavBar.css"
 
 export const NavBar=({currentUser})=>{
     const navigate=useNavigate()
-    console.log(currentUser)
 
     return(
     <ul className="navbar">
