@@ -36,6 +36,7 @@ export const EditEventForm = ({currentUser}) => {
       id: thisEvent.id,
       title: thisEvent.title,
       venue: thisEvent.venue,
+      venueLink:thisEvent.venueLink,
       address: thisEvent.address,
       city: thisEvent.city,
       stateId: thisEvent.stateId,
@@ -89,6 +90,23 @@ export const EditEventForm = ({currentUser}) => {
           </label>
         </div>
       </fieldset>{" "}
+      <fieldset>
+            <div className="form-group">
+                <label>Venue link:
+                    <input 
+                        className="form-control"
+                        type="text"
+                        value={thisEvent.venueLink?thisEvent.venueLink:""}
+                        onChange={(event)=>{
+                          const copy = { ...thisEvent };
+                          copy.venueLink = event.target.value;
+                          setEvent(copy);
+                        
+                        }}
+                    />
+                </label>
+            </div>
+        </fieldset>
       <fieldset>
         <div className="form-group">
           <label>

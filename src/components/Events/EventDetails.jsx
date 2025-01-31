@@ -43,6 +43,9 @@ export const EventDetails = ({ currentUser }) => {
     deleteAttendance(isAttending.id).then(()=>{setIsAttending(false)}).then(()=>{
         navigate("/events/myevents")})
   }
+  const fullAddress= `${event.address}+ ${event.city}+ ${event.state?.state_name}`
+
+  console.log(fullAddress)
 
   return (
     <section className="event">
@@ -53,11 +56,11 @@ export const EventDetails = ({ currentUser }) => {
             </div>
             <div>
                 <span className="event-info">Venue:</span>
-                {event?.venue}
+                <Link to={`${event.venueLink}`}>{event.venue}</Link>
             </div>
             <div>
                 <span className="event-info">Address:</span>
-                {event.address}, {event.city}, {event.state?.state_name}
+               <Link to={`https://www.google.com/maps?q=${fullAddress}`}> {event.address}, {event.city}, {event.state?.state_name}</Link>
             </div>
             <div>
                 <span className="event-info">Price to attend($):</span>

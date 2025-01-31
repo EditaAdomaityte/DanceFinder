@@ -21,6 +21,7 @@ export const NewEventForm = ({ currentUser }) => {
   const [date, setDate] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [link, setLink]=useState("")
 
   useEffect(() => {
     getAllDances().then((danceArray) => {
@@ -40,6 +41,7 @@ export const NewEventForm = ({ currentUser }) => {
     const createdEvent={
         title: title,
         venue: venue,
+        venueLink: link,
         address: address,
         city: city,
         stateId: parseInt(selectedState),
@@ -85,7 +87,22 @@ export const NewEventForm = ({ currentUser }) => {
                     />
                 </label>
             </div>
-        </fieldset> <fieldset>
+        </fieldset>
+         <fieldset>
+            <div className="form-group">
+                <label>Venue link:
+                    <input 
+                        className="form-control"
+                        type="text"
+                        onChange={(event)=>{
+                            const newLink=event.target.value;
+                            setLink(newLink)
+                        }}
+                    />
+                </label>
+            </div>
+        </fieldset>
+         <fieldset>
             <div className="form-group">
                 <label>Address:
                     <input 
