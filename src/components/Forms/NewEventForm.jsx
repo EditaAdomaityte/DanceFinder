@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./Forms.css";
 import { useEffect, useState } from "react";
-import { getAllDances } from "../../services/danceServices";
+import { createDanceInEvent, getAllDances } from "../../services/danceServices";
 import { getAllAges, getAllStates } from "../../services/extraServices";
 import { createNewEvent } from "../../services/eventServices";
 
@@ -22,6 +22,7 @@ export const NewEventForm = ({ currentUser }) => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
+  const [selectedDances, setSelectedDances] = useState([]);
 
   useEffect(() => {
     getAllDances().then((danceArray) => {
@@ -35,7 +36,26 @@ export const NewEventForm = ({ currentUser }) => {
     });
   }, []);
 
-  const handleSaveEvent = (event) => {
+  const handleDanceChange = (event) => {
+    const foundDance = selectedDances.find((selectedDance) => {
+      return selectedDance.id === Number(event.target.id);
+    });
+    if (foundDance) {
+      console.log(foundDance);
+      const newCurrentDance = selectedDances.filter((selectedDance) => {
+        return selectedDance.id !== foundDance.id;
+      });
+      setSelectedDances(newCurrentDance);
+    } else {
+      const newDance = {
+        danceTypeId: Number(event.target.id),
+      };
+      const addedDances = [...selectedDances, newDance];
+      setSelectedDances(addedDances);
+      console.log(addedDances)
+    }
+  };
+  const handleSaveEvent = async (event) => {
     event.preventDefault();
 
     const createdEvent = {
@@ -52,9 +72,16 @@ export const NewEventForm = ({ currentUser }) => {
       description: description,
       danceTypeId: parseInt(selectedDanceType),
     };
-    createNewEvent(createdEvent).then(() => {
-      navigate("/events/myevents");
-    });
+    const NewEvent = await createNewEvent(createdEvent);
+
+    if(selectedDances&&selectedDances.length>0){
+        const dancesInEventArray=selectedDances.map((dance)=>({
+            eventId:NewEvent.id,
+            danceTypeId:dance.id
+        }))
+        await createDanceInEvent(dancesInEventArray)
+    }
+    navigate(`/events/myevents`)
   };
 
   return (
@@ -232,6 +259,23 @@ export const NewEventForm = ({ currentUser }) => {
               ))}
             </select>
           </label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div className="form-group">
+          <label>Dance Types:</label>
+          {allDanceTypes.map((dance) => {
+            return (
+              <div key={dance.id}>
+                <input
+                  type="checkbox"
+                  id={dance.id}
+                  onChange={handleDanceChange}
+                />
+                {dance.type}
+              </div>
+            );
+          })}
         </div>
       </fieldset>
       <fieldset>
