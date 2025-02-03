@@ -5,14 +5,14 @@ import { getAllAges, getAllStates } from "../../services/extraServices";
 import { editEvent, getEventById } from "../../services/eventServices";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const EditEventForm = ({currentUser}) => {
+export const EditEventForm = ({ currentUser }) => {
   const [thisEvent, setEvent] = useState({});
   const [allDanceTypes, setAllDanceTypes] = useState([]);
   const [allAges, setAllAges] = useState([]);
   const [states, setAllStates] = useState([]);
 
   const { eventid } = useParams();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     getEventById(eventid).then((data) => {
@@ -36,16 +36,16 @@ export const EditEventForm = ({currentUser}) => {
       id: thisEvent.id,
       title: thisEvent.title,
       venue: thisEvent.venue,
-      venueLink:thisEvent.venueLink,
+      venueLink: thisEvent.venueLink,
       address: thisEvent.address,
       city: thisEvent.city,
-      stateId: thisEvent.stateId,
+      stateId: parseInt(thisEvent.stateId),
       date: thisEvent.date,
       userId: currentUser.id,
-      price: thisEvent.price,
-      ageId: thisEvent.ageId,
+      price: parseInt(thisEvent.price),
+      ageId: parseInt(thisEvent.ageId),
       description: thisEvent.description,
-      danceTypeId: thisEvent.danceTypeId,
+      danceTypeId: parseInt(thisEvent.danceTypeId),
     };
 
     editEvent(editedEvent).then(() => {
@@ -91,22 +91,22 @@ export const EditEventForm = ({currentUser}) => {
         </div>
       </fieldset>{" "}
       <fieldset>
-            <div className="form-group">
-                <label>Venue link:
-                    <input 
-                        className="form-control"
-                        type="text"
-                        value={thisEvent.venueLink?thisEvent.venueLink:""}
-                        onChange={(event)=>{
-                          const copy = { ...thisEvent };
-                          copy.venueLink = event.target.value;
-                          setEvent(copy);
-                        
-                        }}
-                    />
-                </label>
-            </div>
-        </fieldset>
+        <div className="form-group">
+          <label>
+            Venue link:
+            <input
+              className="form-control"
+              type="text"
+              value={thisEvent.venueLink ? thisEvent.venueLink : ""}
+              onChange={(event) => {
+                const copy = { ...thisEvent };
+                copy.venueLink = event.target.value;
+                setEvent(copy);
+              }}
+            />
+          </label>
+        </div>
+      </fieldset>
       <fieldset>
         <div className="form-group">
           <label>
@@ -149,9 +149,9 @@ export const EditEventForm = ({currentUser}) => {
               value={thisEvent.stateId}
               name="stateId"
               onChange={(event) => {
-                const copy = { ...thisEvent};
+                const copy = { ...thisEvent };
                 copy[event.target.name] = event.target.value;
-                setEvent(copy)
+                setEvent(copy);
               }}
             >
               <option value="">Select State</option>
@@ -208,7 +208,7 @@ export const EditEventForm = ({currentUser}) => {
               onChange={(event) => {
                 const copy = { ...thisEvent };
                 copy[event.target.name] = event.target.value;
-                setEvent(copy)
+                setEvent(copy);
               }}
             >
               <option value="Select Age">Select Age</option>
@@ -230,7 +230,7 @@ export const EditEventForm = ({currentUser}) => {
               type="text"
               value={thisEvent.description ? thisEvent.description : ""}
               onChange={(event) => {
-                const copy = { ...thisEvent};
+                const copy = { ...thisEvent };
                 copy.description = event.target.value;
                 setEvent(copy);
               }}
@@ -248,7 +248,7 @@ export const EditEventForm = ({currentUser}) => {
               onChange={(event) => {
                 const copy = { ...thisEvent };
                 copy[event.target.name] = event.target.value;
-                setEvent(copy)
+                setEvent(copy);
               }}
             >
               <option value="Select a Dance Type">Select Dance Type</option>
