@@ -17,7 +17,7 @@ export const createNewEvent = (newEventObj) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newEventObj),
-  });
+  }).then((res) => res.json());
 };
 
 export const deleteEvent = (eventid) => {

@@ -73,11 +73,12 @@ export const NewEventForm = ({ currentUser }) => {
       danceTypeId: parseInt(selectedDanceType),
     };
     const NewEvent = await createNewEvent(createdEvent);
+    console.log (NewEvent)
 
     if(selectedDances&&selectedDances.length>0){
         const dancesInEventArray=selectedDances.map((dance)=>({
             eventId:NewEvent.id,
-            danceTypeId:dance.id
+            danceTypeId:dance.danceTypeId
         }))
         await createDanceInEvent(dancesInEventArray)
     }
@@ -280,7 +281,7 @@ export const NewEventForm = ({ currentUser }) => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <button className="form-btn btn-primary" onClick={handleSaveEvent}>
+          <button type="button" className="form-btn btn-primary" onClick={handleSaveEvent}>
             Save Event
           </button>
         </div>

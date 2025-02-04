@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Forms.css";
-import { getAllDances } from "../../services/danceServices";
+import { createDanceInEvent, deleteDanceInEventsByEventId, getAllDances, getDancesByEventId } from "../../services/danceServices";
 import { getAllAges, getAllStates } from "../../services/extraServices";
 import { editEvent, getEventById } from "../../services/eventServices";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,6 +10,8 @@ export const EditEventForm = ({ currentUser }) => {
   const [allDanceTypes, setAllDanceTypes] = useState([]);
   const [allAges, setAllAges] = useState([]);
   const [states, setAllStates] = useState([]);
+  const [currentDances, setCurrentDances] = useState([]);
+  const [dancesChanged, setDancesChanged] = useState(false);
 
   const { eventid } = useParams();
   const navigate = useNavigate();
@@ -28,7 +30,32 @@ export const EditEventForm = ({ currentUser }) => {
     getAllStates().then((stateArray) => {
       setAllStates(stateArray);
     });
-  }, []);
+    getDancesByEventId(eventid).then(array=>
+      setCurrentDances(array)
+    )
+  }, [eventid]);
+
+  const handleDanceChange=(event)=>{
+    setDancesChanged(true)
+    const foundDance=currentDances.find(currentDance=>{
+      return currentDance.danceTypeId===Number(event.target.id)
+    })
+    if(foundDance){
+      console.log(foundDance)
+      const newCurrentDances=currentDances.filter(currentDance=>{
+        return currentDance.danceTypeId !== foundDance.danceTypeId
+      })
+      setCurrentDances(newCurrentDances)
+    }else{
+      const newDance={
+        eventId: parseInt(eventid),
+        danceTypeId:parseInt(event.target.id)
+
+      }
+      const newCurrentDances=[...currentDances,newDance]
+      setCurrentDances(newCurrentDances)
+    }
+  }
 
   const handleSave = (event) => {
     event.preventDefault();
@@ -48,9 +75,10 @@ export const EditEventForm = ({ currentUser }) => {
       danceTypeId: parseInt(thisEvent.danceTypeId),
     };
 
-    editEvent(editedEvent).then(() => {
-      navigate(`/events/${eventid}`);
-    });
+    editEvent(editedEvent)
+      deleteDanceInEventsByEventId(eventid).then(()=>{
+      createDanceInEvent(currentDances)}).then(()=>{
+      navigate(`/events/${eventid}`)});
   };
 
   return (
@@ -259,6 +287,26 @@ export const EditEventForm = ({ currentUser }) => {
               ))}
             </select>
           </label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div className="form-group">
+          <label>Types of Dances:</label>
+          {allDanceTypes.map((dance) => {
+            return (
+              <div key={dance.id}>
+                <input
+                  type="checkbox"
+                  id={dance.id}
+                  defaultChecked={currentDances.find(
+                    (currentDance) => currentDance.danceTypeId === dance.id
+                  )}
+                  onChange={handleDanceChange}
+                />
+                {dance.type}
+              </div>
+            );
+          })}
         </div>
       </fieldset>
       <fieldset>
