@@ -97,12 +97,6 @@ export const EventDetails = ({ currentUser }) => {
         {event.venue}
       </div>
       <div>
-        <span className="event-info">Type of Dance:</span>
-        <Link to={`/dances/${event.danceType?.id}`}>
-          {event.danceType?.type}
-        </Link>
-      </div>
-      <div>
         <span className="event-info">Types of Dances:</span>
         {dances.map((dance, index) => {
           return (

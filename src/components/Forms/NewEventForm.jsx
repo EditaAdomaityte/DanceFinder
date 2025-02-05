@@ -52,7 +52,7 @@ export const NewEventForm = ({ currentUser }) => {
       };
       const addedDances = [...selectedDances, newDance];
       setSelectedDances(addedDances);
-      console.log(addedDances)
+      console.log(addedDances);
     }
   };
   const handleSaveEvent = async (event) => {
@@ -73,16 +73,16 @@ export const NewEventForm = ({ currentUser }) => {
       danceTypeId: parseInt(selectedDanceType),
     };
     const NewEvent = await createNewEvent(createdEvent);
-    console.log (NewEvent)
+    console.log(NewEvent);
 
-    if(selectedDances&&selectedDances.length>0){
-        const dancesInEventArray=selectedDances.map((dance)=>({
-            eventId:NewEvent.id,
-            danceTypeId:dance.danceTypeId
-        }))
-        await createDanceInEvent(dancesInEventArray)
+    if (selectedDances && selectedDances.length > 0) {
+      const dancesInEventArray = selectedDances.map((dance) => ({
+        eventId: NewEvent.id,
+        danceTypeId: dance.danceTypeId,
+      }));
+      await createDanceInEvent(dancesInEventArray);
     }
-    navigate(`/events/myevents`)
+    navigate(`/events/myevents`);
   };
 
   return (
@@ -246,24 +246,6 @@ export const NewEventForm = ({ currentUser }) => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label>
-            Dance Type:
-            <select
-              value={selectedDanceType}
-              onChange={(event) => setSelectedDanceType(event.target.value)}
-            >
-              <option value="Select a Dance Type">Select Dance Type</option>
-              {allDanceTypes.map((dance) => (
-                <option key={dance.id} value={dance.id}>
-                  {dance.type}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div className="form-group">
           <label>Dance Types:</label>
           {allDanceTypes.map((dance) => {
             return (
@@ -281,7 +263,11 @@ export const NewEventForm = ({ currentUser }) => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <button type="button" className="form-btn btn-primary" onClick={handleSaveEvent}>
+          <button
+            type="button"
+            className="form-btn btn-primary"
+            onClick={handleSaveEvent}
+          >
             Save Event
           </button>
         </div>

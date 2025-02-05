@@ -23,20 +23,28 @@ export const createDanceInEvent = async (array) => {
   }
 };
 
-export const getDancesByEventId=(eventId)=>{
-    return fetch (`http://localhost:8088/danceTypeInEvent?eventId=${eventId}&_expand=danceType`).then((res) =>
-        res.json()
-      );
-}
+export const getDancesByEventId = (eventId) => {
+  return fetch(
+    `http://localhost:8088/danceTypeInEvent?eventId=${eventId}&_expand=danceType`
+  ).then((res) => res.json());
+};
 
-export const deleteDanceInEventsByEventId = async(eventId)=>{
-  
-   const response=await fetch(`http://localhost:8088/danceTypeInEvent?eventId=${eventId}`)
-   const dancesInEventArray= await response.json()//result is array that has objects with eventId
-   
-   for (const dance of dancesInEventArray){//deleting every object in the array
-    await fetch (`http://localhost:8088/danceTypeInEvent/${dance.id}`,{
-        method: "DELETE"})}
-   
-  } 
+export const deleteDanceInEventsByEventId = async (eventId) => {
+  const response = await fetch(
+    `http://localhost:8088/danceTypeInEvent?eventId=${eventId}`
+  );
+  const dancesInEventArray = await response.json(); //result is array that has objects with eventId
 
+  for (const dance of dancesInEventArray) {
+    //deleting every object in the array
+    await fetch(`http://localhost:8088/danceTypeInEvent/${dance.id}`, {
+      method: "DELETE",
+    });
+  }
+};
+
+export const getDancesInEvent = () => {
+  return fetch(`http://localhost:8088/danceTypeInEvent?_expand=danceType`).then(
+    (res) => res.json()
+  );
+};

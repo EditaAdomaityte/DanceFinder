@@ -3,7 +3,7 @@ import "./Events.css";
 import { getAllEvents } from "../../services/eventServices";
 import { Event } from "./Event";
 import { EventFilterBar } from "./EventFilterBar";
-import { getAllDances } from "../../services/danceServices";
+import { getAllDances, getDancesInEvent } from "../../services/danceServices";
 import { getAllAges, getAllStates } from "../../services/extraServices";
 
 export const EventList = ({ currentUser }) => {
@@ -16,6 +16,7 @@ export const EventList = ({ currentUser }) => {
   const [selectedDanceType, setSelectedDanceType] = useState("Select Dance");
   const [allAges, setAllAges] = useState([]);
   const [selectedAge, setSelectedAge] = useState("Select Age Group");
+  const [allDancesInEvent,setAllDancesInEvent]=useState([])
 
   useEffect(() => {
     getAllEvents().then((eventArray) => {
@@ -30,9 +31,11 @@ export const EventList = ({ currentUser }) => {
     getAllStates().then((stateArray) => {
       setAllStates(stateArray);
     });
+    getDancesInEvent().then((array)=>{
+        setAllDancesInEvent(array)
+    })
   }, []);
-
-  console.log(allAges);
+console.log(selectedDanceType)
 
   useEffect(() => {
     let filtered = allEvents;
@@ -55,11 +58,15 @@ export const EventList = ({ currentUser }) => {
       });
     }
     if (selectedDanceType !== "Select Dance") {
-      filtered = filtered.filter((event) => {
-        const dance = allDanceTypes.find((d) => d.id === event.danceTypeId);
-        return dance.type === selectedDanceType;
-      });
-    }
+        filtered = filtered.filter((event) => {
+          // Check if any of the danceTypeInEvent entries for this event match the selected dance type
+         const foundDances= allDancesInEvent.filter(
+            (danceInEvent) =>danceInEvent.danceTypeId === parseInt(selectedDanceType)
+          );
+          // Check if any of the found dances have the same eventId as the current event
+          return foundDances.find((danceInEvent)=>danceInEvent.eventId===event.id)
+        });}
+    
     setFilteredEvents(filtered);
   }, [
     searchTerm,
@@ -70,6 +77,7 @@ export const EventList = ({ currentUser }) => {
     allDanceTypes,
     selectedState,
     allStates,
+    allDancesInEvent
   ]);
 
   return (

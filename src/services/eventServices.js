@@ -1,12 +1,12 @@
 export const getAllEvents = () => {
   return fetch(
-    "http://localhost:8088/events?_expand=user&_expand=ageRange&_expand=danceType&_expand=state&_embed=attendance"
+    "http://localhost:8088/events?_expand=user&_expand=ageRange&_expand=state&_embed=attendance"
   ).then((res) => res.json());
 };
 
 export const getEventById = (eventid) => {
   return fetch(
-    `http://localhost:8088/events?id=${eventid}&_expand=user&_expand=age&_expand=danceType&_expand=state&_embed=attendance`
+    `http://localhost:8088/events?id=${eventid}&_expand=user&_expand=age&_expand=state&_embed=attendance`
   ).then((res) => res.json());
 };
 
