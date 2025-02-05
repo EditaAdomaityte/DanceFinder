@@ -30,10 +30,8 @@ export const DanceDetails = () => {
         {dance.description}
       </div>
       <div className="picture">
-        {dance.picture &&(
-        <img src={dance.picture}
-            alt={dance.type}
-            className="dance-image"/>
+        {dance.picture && (
+          <img src={dance.picture} alt={dance.type} className="dance-image" />
         )}
       </div>
     </section>
