@@ -3,10 +3,12 @@ import "./Events.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteEvent, getEventById } from "../../services/eventServices";
 import { addAttendance, deleteAttendance } from "../../services/extraServices";
+import { getDancesByEventId } from "../../services/danceServices";
 
 export const EventDetails = ({ currentUser }) => {
   const [event, setEvent] = useState({});
   const [isAttending, setIsAttending] = useState(false);
+  const [dances, setDances] = useState([]);
 
   const { eventid } = useParams();
   const navigate = useNavigate();
@@ -21,6 +23,9 @@ export const EventDetails = ({ currentUser }) => {
         (attendance) => attendance.userId === currentUser.id
       );
       setIsAttending(attending);
+      getDancesByEventId(eventid).then((array) => {
+        setDances(array);
+      });
     });
   }, [eventid, currentUser.id]);
 
@@ -55,7 +60,7 @@ export const EventDetails = ({ currentUser }) => {
   };
   const fullAddress = `${event.venue}+${event.address}+ ${event.city}+ ${event.state?.state_name}`;
 
-  console.log(fullAddress);
+  console.log(dances);
 
   return (
     <section className="event">
@@ -92,10 +97,17 @@ export const EventDetails = ({ currentUser }) => {
         {event.venue}
       </div>
       <div>
-        <span className="event-info">Type of Dance:</span>
-        <Link to={`/dances/${event.danceType?.id}`}>
-          {event.danceType?.type}
-        </Link>
+        <span className="event-info">Types of Dances:</span>
+        {dances.map((dance, index) => {
+          return (
+            <ul key={dance.danceType.id}>
+             <li> <Link  to={`/dances/${dance.danceType.id}`}>
+                {dance.danceType.type}
+              </Link></li>
+              {index<dance.length-1 &&','}{/* Adds a comma except after the last link */}
+            </ul>
+          );
+        })}
       </div>
       <div>
         <span className="event-info">Description:</span>

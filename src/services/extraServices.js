@@ -26,3 +26,4 @@ export const deleteAttendance = (attendingId)=>{
 export const getAttendanceByUserId=(userId)=>{
     return fetch(`http://localhost:8088/attendance?userId=${userId}`).then((res) => res.json());
 }
+

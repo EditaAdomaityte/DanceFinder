@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Forms.css";
-import { getAllDances } from "../../services/danceServices";
+import {
+  createDanceInEvent,
+  deleteDanceInEventsByEventId,
+  getAllDances,
+  getDancesByEventId,
+} from "../../services/danceServices";
 import { getAllAges, getAllStates } from "../../services/extraServices";
 import { editEvent, getEventById } from "../../services/eventServices";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,6 +15,8 @@ export const EditEventForm = ({ currentUser }) => {
   const [allDanceTypes, setAllDanceTypes] = useState([]);
   const [allAges, setAllAges] = useState([]);
   const [states, setAllStates] = useState([]);
+  const [currentDances, setCurrentDances] = useState([]);
+  const [dancesChanged, setDancesChanged] = useState(false);
 
   const { eventid } = useParams();
   const navigate = useNavigate();
@@ -28,9 +35,34 @@ export const EditEventForm = ({ currentUser }) => {
     getAllStates().then((stateArray) => {
       setAllStates(stateArray);
     });
-  }, []);
+    getDancesByEventId(eventid).then((array) => setCurrentDances(array));
+  }, [eventid]);
 
-  const handleSave = (event) => {
+  const handleDanceChange = (event) => {
+    setDancesChanged(true);
+
+    const targetDanceId = Number(event.target.id);
+    const isDanceAlreadySelected = currentDances.some(
+      (currentDance) => currentDance.danceTypeId === targetDanceId
+    );
+
+    if (isDanceAlreadySelected) {
+      // Remove the dance if it's already selected
+      setCurrentDances((prevDances) =>
+        prevDances.filter((dance) => dance.danceTypeId !== targetDanceId)
+      );
+    } else {
+      // Add the dance if it's not already selected
+      const newDance = {
+        eventId: parseInt(eventid),
+        danceTypeId: targetDanceId,
+      };
+
+      setCurrentDances((prevDances) => [...prevDances, newDance]);
+    }
+  };
+
+  const handleSave = async (event) => {
     event.preventDefault();
     const editedEvent = {
       id: thisEvent.id,
@@ -48,9 +80,23 @@ export const EditEventForm = ({ currentUser }) => {
       danceTypeId: parseInt(thisEvent.danceTypeId),
     };
 
-    editEvent(editedEvent).then(() => {
+    try {
+      // Update the event first
+      await editEvent(editedEvent);
+
+      // Then delete existing dances associated with the event
+      await deleteDanceInEventsByEventId(eventid);
+
+      // Finally, create the new dances in the event
+      await createDanceInEvent(currentDances);
+
+      // Navigate to the event details page after successful save
       navigate(`/events/${eventid}`);
-    });
+    } catch (error) {
+      console.error("Error saving the event: ", error);
+      // Show an error message to the user, or handle it appropriately
+      alert("There was an issue saving your event. Please try again later.");
+    }
   };
 
   return (
@@ -240,25 +286,22 @@ export const EditEventForm = ({ currentUser }) => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label>
-            Dance Type:
-            <select
-              value={thisEvent.danceTypeId}
-              name="danceTypeId"
-              onChange={(event) => {
-                const copy = { ...thisEvent };
-                copy[event.target.name] = event.target.value;
-                setEvent(copy);
-              }}
-            >
-              <option value="Select a Dance Type">Select Dance Type</option>
-              {allDanceTypes.map((dance) => (
-                <option key={dance.id} value={dance.id}>
-                  {dance.type}
-                </option>
-              ))}
-            </select>
-          </label>
+          <label>Types of Dances:</label>
+          {allDanceTypes.map((dance) => {
+            return (
+              <div key={dance.id}>
+                <input
+                  type="checkbox"
+                  id={dance.id}
+                  checked={currentDances.some(
+                    (currentDance) => currentDance.danceTypeId === dance.id
+                  )}
+                  onChange={handleDanceChange}
+                />
+                {dance.type}
+              </div>
+            );
+          })}
         </div>
       </fieldset>
       <fieldset>

@@ -41,7 +41,7 @@ export const EventFilterBar = ({
       >
         <option value="Select Dance">Select Dance</option>
         {allDanceTypes.map((type) => (
-          <option key={type.id} value={type.type}>
+          <option key={type.id} value={type.id}>
             {type.type}
           </option>
         ))}

@@ -28,14 +28,14 @@ export const ApplicationViews = (Authorized) => {
         path="/"
         element={
           <>
-            <NavBar currentUser={currentUser}/>
+            <NavBar currentUser={currentUser} />
             <Outlet />
           </>
         }
       >
         <Route index element={<Welcome />} />
         <Route path="events">
-          <Route index element={<EventList currentUser={currentUser}/>} />
+          <Route index element={<EventList currentUser={currentUser} />} />
           <Route
             path=":eventid"
             element={<EventDetails currentUser={currentUser} />}
