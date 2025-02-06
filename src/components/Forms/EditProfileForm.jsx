@@ -41,7 +41,6 @@ export const EditProfileForm = ({ currentUser }) => {
     <form className="form-group">
       <h2>Edit Profile</h2>
       <fieldset>
-        <div className="form-group">
           <label>
             Name:
             <input
@@ -55,10 +54,8 @@ export const EditProfileForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             City:
             <input
@@ -72,10 +69,8 @@ export const EditProfileForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             State:
             <select
@@ -95,10 +90,8 @@ export const EditProfileForm = ({ currentUser }) => {
               ))}
             </select>
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             Email:
             <input
@@ -112,14 +105,11 @@ export const EditProfileForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <button className="form-btn btn-primary" onClick={handleSave}>
             Save Changes
           </button>
-        </div>
       </fieldset>
     </form>
   );

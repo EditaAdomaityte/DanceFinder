@@ -40,13 +40,13 @@ export const MyEvents = ({ currentUser }) => {
 
   return (
     <>
-      <div className="events">
-        <h2>My Events</h2>
+      <div className="posts">
         {currentUser.isOrganizer === true && (
-          <div>
+          <div className="events">
+            <h2>My Events</h2>
             <div>
-              <button
-                className="btn btn-secondary"
+             <div className="btn-container"> <button
+                className="btn btn-edit"
                 onClick={() => {
                   navigate(`/newevent`);
                 }}
@@ -54,7 +54,7 @@ export const MyEvents = ({ currentUser }) => {
                 Create New Event
               </button>
             </div>
-            <div>
+            <div className="event-list">
               {myEvents.map((event) => {
                 return (
                   <Event
@@ -65,10 +65,12 @@ export const MyEvents = ({ currentUser }) => {
                 );
               })}
             </div>
+           </div>
           </div>
         )}
         {currentUser.isOrganizer === false && (
-          <div>
+          <div className="events">
+             <h2>My Events</h2>
             {eventsAttending.map((event) => {
               return (
                 <AttendingEvent key={event.id} event={event} currentUser={currentUser} />

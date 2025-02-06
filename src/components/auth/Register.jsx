@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Login.css"
 import { createUser, getUserByEmail } from "../../services/userService"
 import { getAllStates } from "../../services/extraServices"
@@ -65,12 +65,14 @@ useEffect(() => {
   }
 
   return (
-    <main style={{ textAlign: "center" }}>
+   
+    <main className="container-register" style={{ textAlign: "center" }}><section>
       <form className="form-login" onSubmit={handleRegister}>
         <h1>💃Dance Finder🕺</h1>
         <h2>Please Register</h2>
+        <div className="form-group">
         <fieldset>
-          <div className="form-group">
+          
             <input
               onChange={updateUser}
               type="text"
@@ -80,10 +82,8 @@ useEffect(() => {
               required
               autoFocus
             />
-          </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
             <input
               onChange={updateUser}
               type="text"
@@ -93,10 +93,8 @@ useEffect(() => {
               required
               autoFocus
             />
-          </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
             <input
               onChange={updateUser}
               type="email"
@@ -105,10 +103,8 @@ useEffect(() => {
               placeholder="Email address"
               required
             />
-          </div>
         </fieldset>
         <fieldset>
-            <div className="form-group">
                 <label>
             <select
                 
@@ -121,12 +117,12 @@ useEffect(() => {
                         </option>
                     )
                     )}
-                </select></label></div>
+                </select></label>
         </fieldset>
         {}
        
         <fieldset>
-          <div className="form-group">
+          
             <label>
               <input
                 onChange={(evt) => {
@@ -139,16 +135,20 @@ useEffect(() => {
               />
               I am an organizer{" "}
             </label>
-          </div>
-        </fieldset>
+          
+        </fieldset></div>
         <fieldset>
-          <div className="form-group">
+          
             <button className="btn btn-primary" type="submit">
               Register
             </button>
-          </div>
+          
         </fieldset>
       </form>
+       </section>
+       <section>
+        <Link to="/login">Go back to Log In Page!</Link>
+      </section>
     </main>
   )
 }

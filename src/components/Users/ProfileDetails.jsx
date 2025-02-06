@@ -8,36 +8,34 @@ export const ProfileDetails = ({ currentUser }) => {
 
   const { userId } = useParams();
   const navigate = useNavigate();
-  console.log(userId);
-
+ 
   useEffect(() => {
     getUserById(userId).then((data) => {
       const userObj = data[0];
-      console.log(data);
       setUser(userObj);
     });
   }, [userId]);
 
   return (
     <section className="user">
-      <header className="user-header">{user.name}</header>
-      <div>
-        <span className="user-info">City:</span>
+      <h2>{user.name}</h2>
+      <div className="user-info2">
+        <span className="user-info1">City:</span>
         {user.city}
       </div>
-      <div>
-        <span className="user-info">State:</span>
+      <div className="user-info2">
+        <span className="user-info1">State:</span>
         {user.state?.state_name}
       </div>
-      <div>
-        <span className="user-info">Email:</span>
+      <div className="user-info2">
+        <span className="user-info1">Email:</span>
         {user.email}
       </div>
-      <div>
-        <span className="user-info"># of Events:</span>
+      <div className="user-info2">
+        <span className="user-info1"># of Events:</span>
         {user.events?.length}
       </div>
-      <div className="btn-container">
+      <div>
         {user.id === currentUser.id && (
           <button
             className="btn btn-edit"

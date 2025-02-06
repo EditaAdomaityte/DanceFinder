@@ -1,6 +1,4 @@
 import "./Dances.css"
-
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllDances } from "../../services/danceServices";
@@ -15,7 +13,7 @@ export const DanceList = () => {
       setAllDances(danceArray);
     });
   }, []);
-  console.log(allDances)
+
 
   return (
     <>
@@ -29,15 +27,15 @@ export const DanceList = () => {
                   <Link to={`/dances/${dance.id}`}><h3>{dance.type}</h3>
                     </Link>
                 </div>
-                <div>
+                <article>
                   
-                  <div className="dance-info">
-                   Origin: {dance.origin}
+                  <div>
+                  <span className="dance-info"> Origin: </span>{dance.origin}
                   </div>
-                  <div className="dance-info">
-                   Description: {dance.description}
+                  <div>
+                  <span className="dance-info"> Description: </span>{dance.short}
                   </div>
-                </div>
+                </article>
               </div>
             );
           })}

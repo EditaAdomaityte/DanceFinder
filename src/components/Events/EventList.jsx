@@ -35,7 +35,7 @@ export const EventList = ({ currentUser }) => {
         setAllDancesInEvent(array)
     })
   }, []);
-console.log(selectedDanceType)
+
 
   useEffect(() => {
     let filtered = allEvents;
@@ -82,7 +82,7 @@ console.log(selectedDanceType)
 
   return (
     <>
-      <div className="posts">
+      <div className="dance">
         <h2>All Events</h2>
         <EventFilterBar
           setSearchTerm={setSearchTerm}
@@ -96,10 +96,12 @@ console.log(selectedDanceType)
           setSelectedState={setSelectedState}
           setSelectedDanceType={setSelectedDanceType}
         />
-        <div>
+        <div className="event-list">
           {filteredEvents.map((event) => {
             return (
-              <Event key={event.id} event={event} currentUser={currentUser} />
+            
+              <Event  key={event.id} event={event} currentUser={currentUser} />
+            
             );
           })}
         </div>

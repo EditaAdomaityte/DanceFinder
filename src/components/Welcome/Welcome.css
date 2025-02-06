@@ -1,29 +1,75 @@
-.welcome-container {
-    margin: 2rem auto;
-    width: 70%;
-    text-align: center;
-    padding: 15rem 3rem;
-    border: 1px solid var(--outline);
-    background-image: url(https://images.unsplash.com/photo-1504609813442-a8924e83f76e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
-    background-size: cover;
-    border-radius: 0.5rem;
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
   
-  /* This targets any h1 that is a child of an element with the .welcome-container class */
-  .welcome-container > h1 {
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  /* Main container */
+  .welcome-container {
     display: flex;
     flex-direction: column;
-    color: rgb(249, 248, 248);
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f8f6f91f;
+    color: white;
+    text-align: center;
+    padding: 0 2rem;
   }
   
-  /* This targets any div that is a child of an element with the .welcome-container class */
-  .welcome-container > div {
-    font-style: italic;
-    color: beige;
-    size: rem;
-  }
-
+  /* Header styling */
   h1 {
-    font-size: 5em;
-    font-weight: bold;
-}
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+  
+  h1 span {
+    display: block;
+    font-weight: 700;
+  }
+  
+  h1 span:first-child {
+    font-size: 2.5rem;
+    color: #f8f6f9;
+  }
+  
+  h1 span:last-child {
+    font-size: 3.2rem;
+    color: #f0ebf1;
+    margin-top: 0.5rem;
+  }
+  
+  /* Subheading Styling */
+  .welcome-container > div {
+    font-size: 1.3rem;
+    color: #e6e6e6;
+    margin-top: 1rem;
+    max-width: 600px;
+    line-height: 1.6;
+    font-weight: 300;
+    padding: 0 1rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .welcome-container {
+      padding: 0 1rem;
+    }
+  
+    h1 {
+      font-size: 2.5rem;
+    }
+  
+    .welcome-container > div {
+      font-size: 1.1rem;
+    }
+  }
+  
+  

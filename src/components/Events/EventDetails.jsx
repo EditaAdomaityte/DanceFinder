@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./Events.css";
+import "./Event.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteEvent, getEventById } from "../../services/eventServices";
 import { addAttendance, deleteAttendance } from "../../services/extraServices";
@@ -60,7 +60,7 @@ export const EventDetails = ({ currentUser }) => {
   };
   const fullAddress = `${event.venue}+${event.address}+ ${event.city}+ ${event.state?.state_name}`;
 
-  console.log(dances);
+
 
   return (
     <section className="event">

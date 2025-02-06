@@ -41,7 +41,6 @@ export const NewEventForm = ({ currentUser }) => {
       return selectedDance.id === Number(event.target.id);
     });
     if (foundDance) {
-      console.log(foundDance);
       const newCurrentDance = selectedDances.filter((selectedDance) => {
         return selectedDance.id !== foundDance.id;
       });
@@ -52,7 +51,6 @@ export const NewEventForm = ({ currentUser }) => {
       };
       const addedDances = [...selectedDances, newDance];
       setSelectedDances(addedDances);
-      console.log(addedDances);
     }
   };
   const handleSaveEvent = async (event) => {
@@ -73,7 +71,6 @@ export const NewEventForm = ({ currentUser }) => {
       danceTypeId: parseInt(selectedDanceType),
     };
     const NewEvent = await createNewEvent(createdEvent);
-    console.log(NewEvent);
 
     if (selectedDances && selectedDances.length > 0) {
       const dancesInEventArray = selectedDances.map((dance) => ({
@@ -89,188 +86,174 @@ export const NewEventForm = ({ currentUser }) => {
     <form className="form-group">
       <h2>New Event</h2>
       <fieldset>
-        <div className="form-group">
-          <label>
-            Title:
-            <input
-              className="form-control"
-              type="text"
-              onChange={(event) => {
-                const newTitle = event.target.value;
-                setTitle(newTitle);
-              }}
-            />
-          </label>
-        </div>
+        <label>
+          Title:
+          <input
+            placeholder="Enter the Title of the Event"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newTitle = event.target.value;
+              setTitle(newTitle);
+            }}
+          />
+        </label>
       </fieldset>{" "}
       <fieldset>
-        <div className="form-group">
-          <label>
-            Venue:
-            <input
-              className="form-control"
-              type="text"
-              onChange={(event) => {
-                const newVenue = event.target.value;
-                setVenue(newVenue);
-              }}
-            />
-          </label>
-        </div>
+        <label>
+          Venue:
+          <input
+            placeholder="Enter Venue Name"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newVenue = event.target.value;
+              setVenue(newVenue);
+            }}
+          />
+        </label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>
-            Venue link:
-            <input
-              className="form-control"
-              type="text"
-              onChange={(event) => {
-                const newLink = event.target.value;
-                setLink(newLink);
-              }}
-            />
-          </label>
-        </div>
+        <label>
+          Venue link:
+          <input
+            placeholder="Enter Venue Link"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newLink = event.target.value;
+              setLink(newLink);
+            }}
+          />
+        </label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>
-            Address:
-            <input
-              className="form-control"
-              type="text"
-              onChange={(event) => {
-                const newAddress = event.target.value;
-                setAddress(newAddress);
-              }}
-            />
-          </label>
-        </div>
+        <label>
+          Address:
+          <input
+            placeholder="Street Address"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newAddress = event.target.value;
+              setAddress(newAddress);
+            }}
+          />
+        </label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>
-            City:
-            <input
-              className="form-control"
-              type="text"
-              onChange={(event) => {
-                const newCity = event.target.value;
-                setCity(newCity);
-              }}
-            />
-          </label>
-        </div>
+        <label>
+          City:
+          <input
+            placeholder="City name"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newCity = event.target.value;
+              setCity(newCity);
+            }}
+          />
+        </label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>
-            State:
-            <select
-              value={selectedState}
-              onChange={(event) => setSelectedState(event.target.value)}
-            >
-              <option value="Select a State">Select State</option>
-              {states.map((state) => (
-                <option key={state.id} value={state.id}>
-                  {state.state_name}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
+        <label>
+          State:
+          <select
+            value={selectedState}
+            onChange={(event) => setSelectedState(event.target.value)}
+          >
+            <option value="Select a State">Select State</option>
+            {states.map((state) => (
+              <option key={state.id} value={state.id}>
+                {state.state_name}
+              </option>
+            ))}
+          </select>
+        </label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>
-            Date:
-            <input
-              className="form-control"
-              type="text"
-              onChange={(event) => {
-                const newDate = event.target.value;
-                setDate(newDate);
-              }}
-            />
-          </label>
-        </div>
+        <label>
+          Date:
+          <input
+            placeholder="Month/day/year"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newDate = event.target.value;
+              setDate(newDate);
+            }}
+          />
+        </label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>
-            Price:
-            <input
-              className="form-control"
-              type="text"
-              onChange={(event) => {
-                const newPrice = event.target.value;
-                setPrice(newPrice);
-              }}
-            />
-          </label>
-        </div>
+        <label>
+          Price:
+          <input
+            placeholder="Price for Event"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newPrice = event.target.value;
+              setPrice(newPrice);
+            }}
+          />
+        </label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>
-            Age Group:
-            <select
-              value={selectedAge}
-              onChange={(event) => setSelectedAge(event.target.value)}
-            >
-              <option value="Select Age">Select Age</option>
-              {allAges.map((age) => (
-                <option key={age.id} value={age.id}>
-                  {age.name}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
+        <label>
+          Age Group:
+          <select
+            value={selectedAge}
+            onChange={(event) => setSelectedAge(event.target.value)}
+          >
+            <option value="Select Age">Select Age</option>
+            {allAges.map((age) => (
+              <option key={age.id} value={age.id}>
+                {age.name}
+              </option>
+            ))}
+          </select>
+        </label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>
-            Description:
-            <input
-              className="form-control"
-              type="text"
-              onChange={(event) => {
-                const newDescription = event.target.value;
-                setDescription(newDescription);
-              }}
-            />
-          </label>
-        </div>
+        <label>
+          Description:
+          <input
+            placeholder="Brief description of event"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newDescription = event.target.value;
+              setDescription(newDescription);
+            }}
+          />
+        </label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>Dance Types:</label>
-          {allDanceTypes.map((dance) => {
-            return (
-              <div key={dance.id}>
+        <label>Dance Types:</label>
+        {allDanceTypes.map((dance) => {
+          return (
+            <div key={dance.id} className="checkbox">
+              <label htmlFor={dance.id}>
                 <input
                   type="checkbox"
                   id={dance.id}
                   onChange={handleDanceChange}
                 />
                 {dance.type}
-              </div>
-            );
-          })}
-        </div>
+              </label>
+            </div>
+          );
+        })}
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <button
-            type="button"
-            className="form-btn btn-primary"
-            onClick={handleSaveEvent}
-          >
-            Save Event
-          </button>
-        </div>
+        <button
+          type="button"
+          className="form-btn btn-primary"
+          onClick={handleSaveEvent}
+        >
+          Save Event
+        </button>
       </fieldset>
     </form>
   );

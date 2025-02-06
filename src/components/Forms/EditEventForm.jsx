@@ -103,7 +103,6 @@ export const EditEventForm = ({ currentUser }) => {
     <form className="form-group">
       <h2>Edi Event</h2>
       <fieldset>
-        <div className="form-group">
           <label>
             Title:
             <input
@@ -117,10 +116,9 @@ export const EditEventForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
+
       </fieldset>{" "}
       <fieldset>
-        <div className="form-group">
           <label>
             Venue:
             <input
@@ -134,10 +132,8 @@ export const EditEventForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
       </fieldset>{" "}
       <fieldset>
-        <div className="form-group">
           <label>
             Venue link:
             <input
@@ -151,10 +147,8 @@ export const EditEventForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             Address:
             <input
@@ -168,10 +162,8 @@ export const EditEventForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             City:
             <input
@@ -185,10 +177,8 @@ export const EditEventForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             State:
             <select
@@ -208,10 +198,8 @@ export const EditEventForm = ({ currentUser }) => {
               ))}
             </select>
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             Date:
             <input
@@ -225,10 +213,8 @@ export const EditEventForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             Price:
             <input
@@ -242,10 +228,8 @@ export const EditEventForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             Age Group:
             <select
@@ -265,10 +249,9 @@ export const EditEventForm = ({ currentUser }) => {
               ))}
             </select>
           </label>
-        </div>
+      
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             Description:
             <input
@@ -282,11 +265,10 @@ export const EditEventForm = ({ currentUser }) => {
               }}
             />
           </label>
-        </div>
+        
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>Types of Dances:</label>
+          <label>Types of Dances:
           {allDanceTypes.map((dance) => {
             return (
               <div key={dance.id}>
@@ -301,15 +283,13 @@ export const EditEventForm = ({ currentUser }) => {
                 {dance.type}
               </div>
             );
-          })}
-        </div>
+          })}</label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <button className="form-btn btn-primary" onClick={handleSave}>
             Save Changes
           </button>
-        </div>
+        
       </fieldset>
     </form>
   );
