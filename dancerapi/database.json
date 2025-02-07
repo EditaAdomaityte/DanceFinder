@@ -1,0 +1,637 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice Johnson",
+      "city": "New York",
+      "stateId": 32,
+      "email": "alice.johnson@email.com",
+      "isOrganizer": true
+    },
+    {
+      "id": 2,
+      "name": "Bob Smith",
+      "city": "Los Angeles",
+      "stateId": 5,
+      "email": "bob.smith@email.com",
+      "isOrganizer": false
+    },
+    {
+      "id": 3,
+      "name": "Charlie Brown",
+      "city": "Chicago",
+      "stateId": 13,
+      "email": "charlie.brown@email.com",
+      "isOrganizer": true
+    },
+    {
+      "id": 4,
+      "name": "Diana Ross",
+      "city": "Houston",
+      "stateId": 43,
+      "email": "diana.ross@email.com",
+      "isOrganizer": false
+    },
+    {
+      "id": 5,
+      "name": "Evan Davis",
+      "city": "Phoenix",
+      "stateId": 3,
+      "email": "evan.davis@email.com",
+      "isOrganizer": true
+    },
+    {
+      "id": 6,
+      "name": "Fayla Green",
+      "city": "San Antonio",
+      "stateId": 43,
+      "email": "fayla.green@email.com",
+      "isOrganizer": false
+    },
+    {
+      "id": 7,
+      "name": "George Walker",
+      "city": "San Diego",
+      "stateId": 5,
+      "email": "george.walker@email.com",
+      "isOrganizer": true
+    },
+    {
+      "id": 8,
+      "name": "Hannah Lee",
+      "city": "Dallas",
+      "stateId": 43,
+      "email": "hannah.lee@email.com",
+      "isOrganizer": false
+    },
+    {
+      "id": 9,
+      "name": "Ian Black",
+      "city": "San Francisco",
+      "stateId": 5,
+      "email": "ian.black@email.com",
+      "isOrganizer": true
+    },
+    {
+      "id": 10,
+      "name": "Jenna White",
+      "city": "Boston",
+      "stateId": 20,
+      "email": "jenna.white@email.com",
+      "isOrganizer": false
+    },
+    {
+      "id": 11,
+      "name": "Kyle Harris",
+      "city": "Seattle",
+      "stateId": 47,
+      "email": "kyle.harris@email.com",
+      "isOrganizer": true
+    },
+    {
+      "id": 12,
+      "name": "Lila Martinez",
+      "city": "Denver",
+      "stateId": 6,
+      "email": "lila.martinez@email.com",
+      "isOrganizer": false
+    },
+    {
+      "id": 13,
+      "name": "Mike Clark",
+      "city": "Austin",
+      "stateId": 43,
+      "email": "mike.clark@email.com",
+      "isOrganizer": true
+    },
+    {
+      "id": 14,
+      "name": "Nina Lewis",
+      "city": "Miami",
+      "stateId": 9,
+      "email": "nina.lewis@email.com",
+      "isOrganizer": false
+    },
+    {
+      "id": 15,
+      "name": "Oscar King",
+      "city": "Atlanta",
+      "stateId": 10,
+      "email": "oscar.king@email.com",
+      "isOrganizer": true
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "title": "Salsa Night Fiesta",
+      "venue": "Salsa Con Fuego",
+      "venueLink": "https://salsaconfuego.com/",
+      "address": "2297 Cedar Ave",
+      "city": "Bronx",
+      "stateId": 32,
+      "date": "2025-02-15",
+      "userId": 11,
+      "price": 25,
+      "ageId": 2,
+      "description": "A fun-filled night of sizzling Salsa music, great food, and dancing under the stars."
+    },
+    {
+      "id": 2,
+      "title": "Bachata Bash",
+      "venue": "Acquaviva Winery & Ristorante",
+      "venueLink": "https://acquavivawinery.com/",
+      "address": "47W614 IL-38",
+      "city": "Maple Park",
+      "stateId": 13,
+      "date": "2025-03-01",
+      "userId": 3,
+      "price": 30,
+      "ageId": 2,
+      "description": "Always fun with bachata"
+    },
+    {
+      "id": 3,
+      "title": "Kizomba Under the Stars",
+      "venue": "Dance Life Studio",
+      "venueLink": "https://dancelife.studio/",
+      "address": "10003 NW Military Hwy #1126",
+      "city": "San Antonio",
+      "stateId": 43,
+      "date": "2025-04-10",
+      "userId": 5,
+      "price": 40,
+      "ageId": 3,
+      "description": "Experience the passion of Kizomba dancing at our open-air ballroom."
+    },
+    {
+      "id": 4,
+      "title": "Cha Cha Celebration",
+      "venue": "The Dana on Mission Bay",
+      "venueLink": "https://thedana.com/",
+      "address": "1710 W Mission Bay Dr,",
+      "city": "San Diego",
+      "stateId": 5,
+      "date": "2025-05-20",
+      "userId": 7,
+      "price": 20,
+      "ageId": 2,
+      "description": "Join us for an energetic night of Cha Cha dancing, with lively music and special guests!"
+    },
+    {
+      "id": 5,
+      "title": "Merengue Rhythms",
+      "venue": "Edge Rooftop",
+      "venueLink": "https://www.edgerooftop.com/",
+      "address": "110 E 2nd St,",
+      "city": "Austin",
+      "stateId": 43,
+      "date": "2025-06-05",
+      "userId": 13,
+      "price": 35,
+      "ageId": 1,
+      "description": "Merengue your way into a night of rhythmic beats, delicious cocktails, and unforgettable dancing."
+    },
+    {
+      "id": 6,
+      "title": "Dance Baby",
+      "venue": "35 North",
+      "venueLink": "https://the35north.com/",
+      "address": " 11321 Kingston Pike",
+      "city": "Knoxville",
+      "stateId": 42,
+      "date": "1/30/2023",
+      "userId": 5,
+      "price": 15,
+      "ageId": 1,
+      "description": "na"
+    },
+    {
+      "id": 7,
+      "title": "as",
+      "venue": "asaa",
+      "venueLink": "as",
+      "address": "as",
+      "city": "as",
+      "stateId": 2,
+      "date": "08-10-2025",
+      "userId": 3,
+      "price": 1,
+      "ageId": 1,
+      "description": "as"
+    }
+  ],
+  "ages": [
+    {
+      "id": 1,
+      "name": "21+"
+    },
+    {
+      "id": 2,
+      "name": "18+"
+    },
+    {
+      "id": 3,
+      "name": "No age restrictions"
+    }
+  ],
+  "danceTypes": [
+    {
+      "id": 1,
+      "type": "Salsa",
+      "description": "Salsa is a lively Latin American dance that combines fast and slow movements, energetic footwork, and hip movements. It's usually danced with a partner to salsa music, which is a fusion of rock, jazz, and Latin rhythms. It is energetic, fluid, playful dance. There are  4 types of Salsa. Ballroom salsa: A structured style that combines salsa rhythms with ballroom dance elegance and precision. Colombian salsa: Also known as salsa caleña, this style is known for its fast speed and circular motion. Miami style salsa: Includes Classico Cubano and Casino. New York style salsa: Includes Mambo salsa and Eddie Torres style.",
+      "origin": "The origins of salsa date back to the 1900s in Eastern Cuba.",
+      "picture": "https://www.wikidancesport.com/Attachments/dances/Salsa/Salsa%20-%204.jpg",
+      "short": "A lively Latin dance with fast and slow movements, energetic footwork, and hip actions. It includes various styles like Ballroom, Colombian, Miami, and New York salsa."
+    },
+    {
+      "id": 2,
+      "type": "Bachata",
+      "description": "Bachata is a Latin dance that's characterized by soft hips, side-to-side footwork, and turns. It's often danced at salsa and merengue clubs. There are 3 styles of bachata. Bachata Sensual: A modern, emotional style that emphasizes body isolations, fluidity, and slow movements. It's often danced very closely. Bachatango: A fusion of Bachata and Tango that combines steps, figures, and music from both dances. Western Traditional: A style that features a simple side-to-side basic and soft hip movements.",
+      "origin": "Bachata originated in the Dominican Republic in the early 20th century. ",
+      "picture": "https://images.squarespace-cdn.com/content/v1/593e0d24b8a79bc41028a2c5/1559870915257-C58NLRPTC55GCYIYVOIQ/Bachata_Banner_503994634.jpg?format=1500w",
+      "short": "A Latin dance with side-to-side footwork and soft hips, often danced closely. Popular styles include Sensual, Bachatango, and Western Traditional."
+    },
+    {
+      "id": 3,
+      "type": "Kizomba",
+      "description": "It's known for its slow, sensual rhythm and smooth, flowing movements. Kizomba has a slow, insistent, and somewhat harsh rhythm. The rhythm is created by electronic percussion.Kizomba was influenced by Cuban culture, including Milonga and Tango. Kizomba is sometimes described as African Tango. There are 2 variations. Kizomba Fusion: Combines Kizomba with other dance styles, such as Hip Hop, Bachata, or Salsa. Urban Kiz: Combines Kizomba with Hip Hop ",
+      "origin": "Kizomba originated in Angola in the 1980s.",
+      "picture": "https://www.goandance.com/es/media/images-manager/Blog%20138/kizomba2.jpg",
+      "short": "Known for slow, sensual movements with a smooth rhythm, influenced by Cuban culture. Styles include Kizomba Fusion and Urban Kiz."
+    },
+    {
+      "id": 4,
+      "type": "ChaCha",
+      "description": "The Cha-Cha is a lively, flirtatious Latin ballroom dance with a distinct shuffle step and lots of hip and pelvic movement. It's known for its rhythmic footwork, sharp movements, and playful energy. The Cha-Cha features a distinct cha-cha-cha shuffle step, as well as walking steps, sidesteps, and a rock step.There are two styles of Cha-Cha: American Rhythm and International. The International style is more advanced and is often used in competitive dancing.  ",
+      "origin": "It  originated in Cuba in the 1940s. It evolved from the Cuban Triple Mambo, a slower version of the mambo.",
+      "picture": "https://www.shutterstock.com/image-photo/dance-beautiful-couple-dancing-ballroom-600nw-556814698.jpg",
+      "short": "A lively Latin ballroom dance with rhythmic footwork, sharp movements, and a playful shuffle step. Includes American and International styles."
+    },
+    {
+      "id": 5,
+      "type": "Merengue",
+      "description": "Merengue is a lively, energetic dance that originated in the Dominican Republic. It's characterized by its simple steps, rhythmic hip movements, and fast-paced music. There are 2 modern interpretations of this dance. Merengue de orquesta is a more polished, urban style that incorporates jazz and other popular music genres. Contemporary merengue fusion styles blend traditional elements with modern genres like reggaeton, hip-hop, and electronic dance music ",
+      "origin": "The merengue dance originated in the Dominican Republic in the 19th century. It's considered the national dance of the country.It's also the national dance of Haiti. ",
+      "picture": "https://www.puertoplatadr.com/cruiseports/wp-content/uploads/2023/05/dominican_music.jpg",
+      "short": "A fast-paced dance from the Dominican Republic with simple steps and rhythmic hip movements. Modern styles mix it with jazz and other genres."
+    }
+  ],
+  "attendance": [
+    {
+      "id": 3,
+      "userId": 6,
+      "eventId": 2
+    },
+    {
+      "id": 5,
+      "userId": 10,
+      "eventId": 3
+    },
+    {
+      "id": 6,
+      "userId": 12,
+      "eventId": 3
+    },
+    {
+      "id": 8,
+      "userId": 12,
+      "eventId": 4
+    },
+    {
+      "id": 9,
+      "userId": 10,
+      "eventId": 5
+    },
+    {
+      "id": 10,
+      "userId": 12,
+      "eventId": 5
+    },
+    {
+      "userId": 14,
+      "eventId": 2,
+      "id": 12
+    },
+    {
+      "userId": 14,
+      "eventId": 3,
+      "id": 13
+    },
+    {
+      "userId": 4,
+      "eventId": 3,
+      "id": 14
+    },
+    {
+      "userId": 2,
+      "eventId": 3,
+      "id": 16
+    },
+    {
+      "userId": 2,
+      "eventId": 4,
+      "id": 17
+    },
+    {
+      "userId": 2,
+      "eventId": 1,
+      "id": 18
+    }
+  ],
+  "states": [
+    {
+      "id": 1,
+      "state_name": "Alabama"
+    },
+    {
+      "id": 2,
+      "state_name": "Alaska"
+    },
+    {
+      "id": 3,
+      "state_name": "Arizona"
+    },
+    {
+      "id": 4,
+      "state_name": "Arkansas"
+    },
+    {
+      "id": 5,
+      "state_name": "California"
+    },
+    {
+      "id": 6,
+      "state_name": "Colorado"
+    },
+    {
+      "id": 7,
+      "state_name": "Connecticut"
+    },
+    {
+      "id": 8,
+      "state_name": "Delaware"
+    },
+    {
+      "id": 9,
+      "state_name": "Florida"
+    },
+    {
+      "id": 10,
+      "state_name": "Georgia"
+    },
+    {
+      "id": 11,
+      "state_name": "Hawaii"
+    },
+    {
+      "id": 12,
+      "state_name": "Idaho"
+    },
+    {
+      "id": 13,
+      "state_name": "Illinois"
+    },
+    {
+      "id": 14,
+      "state_name": "Indiana"
+    },
+    {
+      "id": 15,
+      "state_name": "Iowa"
+    },
+    {
+      "id": 16,
+      "state_name": "Kansas"
+    },
+    {
+      "id": 17,
+      "state_name": "Kentucky"
+    },
+    {
+      "id": 18,
+      "state_name": "Louisiana"
+    },
+    {
+      "id": 19,
+      "state_name": "Maine"
+    },
+    {
+      "id": 20,
+      "state_name": "Maryland"
+    },
+    {
+      "id": 21,
+      "state_name": "Massachusetts"
+    },
+    {
+      "id": 22,
+      "state_name": "Michigan"
+    },
+    {
+      "id": 23,
+      "state_name": "Minnesota"
+    },
+    {
+      "id": 24,
+      "state_name": "Mississippi"
+    },
+    {
+      "id": 25,
+      "state_name": "Missouri"
+    },
+    {
+      "id": 26,
+      "state_name": "Montana"
+    },
+    {
+      "id": 27,
+      "state_name": "Nebraska"
+    },
+    {
+      "id": 28,
+      "state_name": "Nevada"
+    },
+    {
+      "id": 29,
+      "state_name": "New Hampshire"
+    },
+    {
+      "id": 30,
+      "state_name": "New Jersey"
+    },
+    {
+      "id": 31,
+      "state_name": "New Mexico"
+    },
+    {
+      "id": 32,
+      "state_name": "New York"
+    },
+    {
+      "id": 33,
+      "state_name": "North Carolina"
+    },
+    {
+      "id": 34,
+      "state_name": "North Dakota"
+    },
+    {
+      "id": 35,
+      "state_name": "Ohio"
+    },
+    {
+      "id": 36,
+      "state_name": "Oklahoma"
+    },
+    {
+      "id": 37,
+      "state_name": "Oregon"
+    },
+    {
+      "id": 38,
+      "state_name": "Pennsylvania"
+    },
+    {
+      "id": 39,
+      "state_name": "Rhode Island"
+    },
+    {
+      "id": 40,
+      "state_name": "South Carolina"
+    },
+    {
+      "id": 41,
+      "state_name": "South Dakota"
+    },
+    {
+      "id": 42,
+      "state_name": "Tennessee"
+    },
+    {
+      "id": 43,
+      "state_name": "Texas"
+    },
+    {
+      "id": 44,
+      "state_name": "Utah"
+    },
+    {
+      "id": 45,
+      "state_name": "Vermont"
+    },
+    {
+      "id": 46,
+      "state_name": "Virginia"
+    },
+    {
+      "id": 47,
+      "state_name": "Washington"
+    },
+    {
+      "id": 48,
+      "state_name": "West Virginia"
+    },
+    {
+      "id": 49,
+      "state_name": "Wisconsin"
+    },
+    {
+      "id": 50,
+      "state_name": "Wyoming"
+    }
+  ],
+  "danceTypeInEvent": [
+    {
+      "danceTypeId": 2,
+      "eventId": 2,
+      "id": 4
+    },
+    {
+      "danceTypeId": 3,
+      "eventId": 2,
+      "id": 5
+    },
+    {
+      "danceTypeId": 1,
+      "eventId": 2,
+      "id": 6
+    },
+    {
+      "danceTypeId": 4,
+      "eventId": 1,
+      "id": 7
+    },
+    {
+      "danceTypeId": 1,
+      "eventId": 1,
+      "id": 8
+    },
+    {
+      "danceTypeId": 5,
+      "eventId": 1,
+      "id": 9
+    },
+    {
+      "danceTypeId": 3,
+      "eventId": 3,
+      "id": 10
+    },
+    {
+      "danceTypeId": 4,
+      "eventId": 4,
+      "id": 11
+    },
+    {
+      "danceTypeId": 5,
+      "eventId": 4,
+      "id": 12
+    },
+    {
+      "danceTypeId": 5,
+      "eventId": 5,
+      "id": 13
+    },
+    {
+      "danceTypeId": 4,
+      "eventId": 5,
+      "id": 14
+    },
+    {
+      "danceTypeId": 2,
+      "eventId": 6,
+      "id": 15
+    },
+    {
+      "danceTypeId": 4,
+      "eventId": 7,
+      "id": 16
+    },
+    {
+      "danceTypeId": 5,
+      "eventId": 7,
+      "id": 17
+    },
+    {
+      "danceTypeId": 2,
+      "eventId": 7,
+      "id": 18
+    },
+    {
+      "danceTypeId": 1,
+      "id": 19
+    },
+    {
+      "danceTypeId": 1,
+      "id": 20
+    },
+    {
+      "danceTypeId": 1,
+      "id": 21
+    },
+    {
+      "danceTypeId": 2,
+      "id": 22
+    }
+  ]
+}
