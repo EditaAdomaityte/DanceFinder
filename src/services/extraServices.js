@@ -13,7 +13,7 @@ export const addAttendance = (attendance) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(attendance),
-  });
+  }).then((res) => res.json());
 };
 
 

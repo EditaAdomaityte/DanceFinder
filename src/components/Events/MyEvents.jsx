@@ -11,13 +11,22 @@ export const MyEvents = ({ currentUser }) => {
   const [myEvents, setMyEvents] = useState([]);
   const [userAttendance, setUserAttendance] = useState([]);
   const [eventsAttending, setEventsAttending] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
+  
 
   useEffect(() => {
-    getAllEvents().then((eventArray) => {
+    Promise.all([
+      getAllEvents(),
+      getAttendanceByUserId(currentUser?.id)
+    ])
+    .then(([eventArray, attendanceArray]) => {
       setAllEvents(eventArray);
-    });
-    getAttendanceByUserId(currentUser?.id).then((attendanceArray) => {
       setUserAttendance(attendanceArray);
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+      setIsLoading(false);
     });
   }, [currentUser]);
   
@@ -27,7 +36,7 @@ export const MyEvents = ({ currentUser }) => {
       (event) => event.user?.id === parseInt(currentUser?.id)
     );
     setMyEvents(filteredEvents);
-  }, [allEvents]);
+  }, [allEvents,currentUser]);
 
   const navigate = useNavigate();
 
@@ -36,7 +45,12 @@ export const MyEvents = ({ currentUser }) => {
       return allEvents.find((event) => event.id === attendanceRec.eventId);
     });
     setEventsAttending(userEvents);
-  }, [userAttendance]);
+  }, [userAttendance, allEvents]);
+
+  if (isLoading) {
+    return <div>Loading events...</div>;
+  }
+
 
   return (
     <>

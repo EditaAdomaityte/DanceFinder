@@ -76,8 +76,7 @@ export const EditEventForm = ({ currentUser }) => {
       userId: currentUser.id,
       price: parseInt(thisEvent.price),
       ageId: parseInt(thisEvent.ageId),
-      description: thisEvent.description,
-      danceTypeId: parseInt(thisEvent.danceTypeId),
+      description: thisEvent.description
     };
 
     try {
@@ -265,7 +264,6 @@ export const EditEventForm = ({ currentUser }) => {
               }}
             />
           </label>
-        
       </fieldset>
       <fieldset>
           <label>Types of Dances:

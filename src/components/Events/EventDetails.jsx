@@ -34,20 +34,26 @@ export const EventDetails = ({ currentUser }) => {
       navigate("/events/myevents");
     });
   };
-  const handleIAmIn = (event) => {
+  const handleIAmIn = async(event) => {
+    event.preventDefault();
     const createdAttendance = {
       userId: currentUser.id,
       eventId: parseInt(eventid),
     };
 
-    addAttendance(createdAttendance)
-      .then(() => {
-        setIsAttending(true);
-      })
-      .then(() => {
+    try{
+        await addAttendance(createdAttendance);
+      
+        await setIsAttending(true);
+      
         navigate("/events/myevents");
-      });
-  };
+      }catch (error) {
+        console.error("Error saving the attendance: ", error);
+        // Show an error message to the user, or handle it appropriately
+        alert("There was an issue saving your attendance. Please try again later.");
+      }
+    };
+
   // Remove the attendance record for the user from the event
   const handleIAmOut = (event) => {
     deleteAttendance(isAttending.id)
@@ -55,7 +61,7 @@ export const EventDetails = ({ currentUser }) => {
         setIsAttending(false);
       })
       .then(() => {
-        navigate("/events/myevents");
+        navigate("/events/");
       });
   };
   const fullAddress = `${event.venue}+${event.address}+ ${event.city}+ ${event.state?.state_name}`;

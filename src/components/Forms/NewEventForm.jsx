@@ -9,7 +9,6 @@ export const NewEventForm = ({ currentUser }) => {
   const navigate = useNavigate();
 
   const [allDanceTypes, setAllDanceTypes] = useState([]);
-  const [selectedDanceType, setSelectedDanceType] = useState(0);
   const [allAges, setAllAges] = useState([]);
   const [selectedAge, setSelectedAge] = useState(0);
   const [title, setTitle] = useState("");
@@ -67,8 +66,7 @@ export const NewEventForm = ({ currentUser }) => {
       userId: currentUser.id,
       price: parseInt(price),
       ageId: parseInt(selectedAge),
-      description: description,
-      danceTypeId: parseInt(selectedDanceType),
+      description: description
     };
     const NewEvent = await createNewEvent(createdEvent);
 
