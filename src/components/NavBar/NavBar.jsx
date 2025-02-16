@@ -11,6 +11,9 @@ export const NavBar=({currentUser})=>{
             <Link to="/events">All Events</Link>
         </li>
         <li className="navbar-item">
+            <Link to="/eventmap">Event Map</Link>
+        </li>
+        <li className="navbar-item">
             <Link to="/events/myevents">My Events</Link>
         </li>
         <li className="navbar-item">

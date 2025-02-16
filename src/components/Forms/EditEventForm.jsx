@@ -6,7 +6,7 @@ import {
   getAllDances,
   getDancesByEventId,
 } from "../../services/danceServices";
-import { getAllAges, getAllStates } from "../../services/extraServices";
+import { getAllAges, getAllStates, getCoordinates } from "../../services/extraServices";
 import { editEvent, getEventById } from "../../services/eventServices";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -17,6 +17,8 @@ export const EditEventForm = ({ currentUser }) => {
   const [states, setAllStates] = useState([]);
   const [currentDances, setCurrentDances] = useState([]);
   const [dancesChanged, setDancesChanged] = useState(false);
+  const [addressError, setAddressError] = useState("");
+  const [isAddressChanged, setIsAddressChanged] = useState(false);
 
   const { eventid } = useParams();
   const navigate = useNavigate();
@@ -37,6 +39,8 @@ export const EditEventForm = ({ currentUser }) => {
     });
     getDancesByEventId(eventid).then((array) => setCurrentDances(array));
   }, [eventid]);
+
+
 
   const handleDanceChange = (event) => {
     setDancesChanged(true);
@@ -62,8 +66,29 @@ export const EditEventForm = ({ currentUser }) => {
     }
   };
 
+  const handleAddressChange = (field, value) => {
+    setIsAddressChanged(true);
+    setAddressError("");
+    const copy = { ...thisEvent };
+    copy[field] = value;
+    setEvent(copy);
+  };
+
   const handleSave = async (event) => {
     event.preventDefault();
+    setAddressError("")
+
+    try {
+      let coordinates = {
+        latitude: thisEvent.latitude,
+        longitude: thisEvent.longitude
+      };
+       // Only get new coordinates if address-related fields have changed
+       if (isAddressChanged) {
+        const stateName = states.find(s => s.id === parseInt(thisEvent.stateId))?.state_name;
+        coordinates = await getCoordinates(thisEvent.address, thisEvent.city, stateName);
+      }
+
     const editedEvent = {
       id: thisEvent.id,
       title: thisEvent.title,
@@ -72,6 +97,8 @@ export const EditEventForm = ({ currentUser }) => {
       address: thisEvent.address,
       city: thisEvent.city,
       stateId: parseInt(thisEvent.stateId),
+      longitude: coordinates.longitude,
+      latitude: coordinates.latitude,
       date: thisEvent.date,
       userId: currentUser.id,
       price: parseInt(thisEvent.price),
@@ -79,7 +106,7 @@ export const EditEventForm = ({ currentUser }) => {
       description: thisEvent.description
     };
 
-    try {
+    
       // Update the event first
       await editEvent(editedEvent);
 
@@ -94,7 +121,11 @@ export const EditEventForm = ({ currentUser }) => {
     } catch (error) {
       console.error("Error saving the event: ", error);
       // Show an error message to the user, or handle it appropriately
-      alert("There was an issue saving your event. Please try again later.");
+      if (error.message.includes('coordinates')) {
+        setAddressError("Failed to get coordinates for the address. Please check the address and try again.");
+      } else {
+        setAddressError("There was an issue saving your event. Please try again later.");
+      }
     }
   };
 
@@ -154,11 +185,7 @@ export const EditEventForm = ({ currentUser }) => {
               className="form-control"
               type="text"
               value={thisEvent.address ? thisEvent.address : ""}
-              onChange={(event) => {
-                const copy = { ...thisEvent };
-                copy.address = event.target.value;
-                setEvent(copy);
-              }}
+              onChange={(event) => handleAddressChange('address', event.target.value)}
             />
           </label>
       </fieldset>
@@ -169,11 +196,7 @@ export const EditEventForm = ({ currentUser }) => {
               className="form-control"
               type="text"
               value={thisEvent.city ? thisEvent.city : ""}
-              onChange={(event) => {
-                const copy = { ...thisEvent };
-                copy.city = event.target.value;
-                setEvent(copy);
-              }}
+              onChange={(event) =>  handleAddressChange('city', event.target.value)}
             />
           </label>
       </fieldset>
@@ -183,11 +206,7 @@ export const EditEventForm = ({ currentUser }) => {
             <select
               value={thisEvent.stateId}
               name="stateId"
-              onChange={(event) => {
-                const copy = { ...thisEvent };
-                copy[event.target.name] = event.target.value;
-                setEvent(copy);
-              }}
+              onChange={(event) => handleAddressChange('stateId', event.target.value)}
             >
               <option value="">Select State</option>
               {states.map((state) => (
@@ -198,6 +217,7 @@ export const EditEventForm = ({ currentUser }) => {
             </select>
           </label>
       </fieldset>
+      {addressError && <div className="error-message">{addressError}</div>}
       <fieldset>
           <label>
             Date:

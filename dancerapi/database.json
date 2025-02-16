@@ -134,7 +134,9 @@
       "userId": 11,
       "price": 25,
       "ageId": 2,
-      "description": "A fun-filled night of sizzling Salsa music, great food, and dancing under the stars."
+      "description": "A fun-filled night of sizzling Salsa music, great food, and dancing under the stars.",
+      "latitude": "40.86234",
+      "longitude": "-73.91144"
     },
     {
       "id": 2,
@@ -148,7 +150,9 @@
       "userId": 3,
       "price": 30,
       "ageId": 2,
-      "description": "Always fun with bachata"
+      "description": "Always fun with bachata",
+      "latitude": "41.89559",
+      "longitude": "-88.53866"
     },
     {
       "id": 3,
@@ -162,7 +166,9 @@
       "userId": 5,
       "price": 40,
       "ageId": 3,
-      "description": "Experience the passion of Kizomba dancing at our open-air ballroom."
+      "description": "Experience the passion of Kizomba dancing at our open-air ballroom.",
+      "latitude": "29.55339",
+      "longitude": "-98.53640"
     },
     {
       "id": 4,
@@ -176,7 +182,9 @@
       "userId": 7,
       "price": 20,
       "ageId": 2,
-      "description": "Join us for an energetic night of Cha Cha dancing, with lively music and special guests!"
+      "description": "Join us for an energetic night of Cha Cha dancing, with lively music and special guests!",
+      "latitude": "32.76734",
+      "longitude": "-117.23751"
     },
     {
       "id": 5,
@@ -190,7 +198,9 @@
       "userId": 13,
       "price": 35,
       "ageId": 1,
-      "description": "Merengue your way into a night of rhythmic beats, delicious cocktails, and unforgettable dancing."
+      "description": "Merengue your way into a night of rhythmic beats, delicious cocktails, and unforgettable dancing.",
+      "latitude": "30.26430",
+      "longitude": "-97.74341"
     },
     {
       "id": 6,
@@ -204,21 +214,41 @@
       "userId": 5,
       "price": 15,
       "ageId": 1,
-      "description": "na"
+      "description": "na",
+      "latitude": "35.88171",
+      "longitude": "-84.16021"
     },
     {
       "id": 7,
       "title": "as",
-      "venue": "asaa",
-      "venueLink": "as",
-      "address": "as",
-      "city": "as",
-      "stateId": 2,
+      "venue": "SalsaKnox Dance Company",
+      "venueLink": "https://www.salsaknox.com/the-knoxville-friday-salsa-party",
+      "address": "2201 Kerns Rising Way",
+      "city": "Knoxville",
+      "stateId": 42,
       "date": "08-10-2025",
       "userId": 3,
       "price": 1,
       "ageId": 1,
-      "description": "as"
+      "description": "as",
+      "latitude": "35.95505",
+      "longitude": "-83.91395"
+    },
+    {
+      "id": 8,
+      "title": "Latin  Dance Extravaganza",
+      "venue": "Millennium Dance Complex Nashville",
+      "venueLink": "https://mdcnashville.com/",
+      "address": "505 Tillman St",
+      "city": "Memphis",
+      "stateId": 42,
+      "longitude": -89.96140120408162,
+      "latitude": 35.148070653061225,
+      "date": "08/14/2025",
+      "userId": 1,
+      "price": 40,
+      "ageId": 3,
+      "description": "Brief Description"
     }
   ],
   "ages": [
@@ -618,20 +648,14 @@
       "id": 18
     },
     {
-      "danceTypeId": 1,
+      "danceTypeId": 5,
+      "eventId": 8,
       "id": 19
     },
     {
-      "danceTypeId": 1,
+      "danceTypeId": 3,
+      "eventId": 8,
       "id": 20
-    },
-    {
-      "danceTypeId": 1,
-      "id": 21
-    },
-    {
-      "danceTypeId": 2,
-      "id": 22
     }
   ]
 }

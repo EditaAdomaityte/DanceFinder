@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "./Forms.css";
 import { useEffect, useState } from "react";
 import { createDanceInEvent, getAllDances } from "../../services/danceServices";
-import { getAllAges, getAllStates } from "../../services/extraServices";
+import { getAllAges, getAllStates, getCoordinates } from "../../services/extraServices";
 import { createNewEvent } from "../../services/eventServices";
 
 export const NewEventForm = ({ currentUser }) => {
@@ -22,6 +22,8 @@ export const NewEventForm = ({ currentUser }) => {
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const [selectedDances, setSelectedDances] = useState([]);
+  const [coordinates, setCoordinates] = useState({ latitude: null, longitude: null });
+  const [addressError, setAddressError] = useState("");
 
   useEffect(() => {
     getAllDances().then((danceArray) => {
@@ -54,6 +56,15 @@ export const NewEventForm = ({ currentUser }) => {
   };
   const handleSaveEvent = async (event) => {
     event.preventDefault();
+    setAddressError("");
+
+    try {
+      // Get coordinates before creating the event
+      const coords = await getCoordinates(
+        address,
+        city,
+        states.find(s => s.id === parseInt(selectedState))?.state_name
+      );
 
     const createdEvent = {
       title: title,
@@ -62,6 +73,8 @@ export const NewEventForm = ({ currentUser }) => {
       address: address,
       city: city,
       stateId: parseInt(selectedState),
+      longitude: coords.longitude,
+      latitude: coords.latitude,
       date: date,
       userId: currentUser.id,
       price: parseInt(price),
@@ -70,7 +83,7 @@ export const NewEventForm = ({ currentUser }) => {
     };
     const NewEvent = await createNewEvent(createdEvent);
 
-    if (selectedDances && selectedDances.length > 0) {
+    if ( selectedDances.length > 0 && NewEvent.id) {
       const dancesInEventArray = selectedDances.map((dance) => ({
         eventId: NewEvent.id,
         danceTypeId: dance.danceTypeId,
@@ -78,7 +91,11 @@ export const NewEventForm = ({ currentUser }) => {
       await createDanceInEvent(dancesInEventArray);
     }
     navigate(`/events/myevents`);
-  };
+  } catch (error) {
+    setAddressError("Failed to get coordinates for the address. Please check the address and try again.");
+    console.error("Geocoding error:", error);
+  }
+};
 
   return (
     <form className="form-group">
@@ -168,6 +185,7 @@ export const NewEventForm = ({ currentUser }) => {
             ))}
           </select>
         </label>
+        {addressError && <div className="error-message">{addressError}</div>}
       </fieldset>
       <fieldset>
         <label>
