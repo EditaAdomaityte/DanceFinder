@@ -3,7 +3,7 @@ export const getAllEvents = () => {
 }
 
 export const getEventById = (eventId) => {
-    return fetch(`http://localhost:8088/events?id=${eventId}&_expand=user&_expand=age&_expand=sate&_embed=attendance`).then((res)=>res.json())
+    return fetch(`http://localhost:8088/events?id=${eventId}&_expand=user&_expand=age&_expand=state&_embed=attendance`).then((res)=>res.json())
 }
 
 export const createNewEvent =async(newEventObj)=>{

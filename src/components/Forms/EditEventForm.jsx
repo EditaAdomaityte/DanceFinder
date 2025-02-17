@@ -113,14 +113,14 @@ export const EditEventForm = ({ currentUser }) => {
       // Then delete existing dances associated with the event
       await deleteDanceInEventsByEventId(eventid);
 
-      // Finally, create the new dances in the event
+      // Create the new dances in the event
       await createDanceInEvent(currentDances);
 
-      // Navigate to the event details page after successful save
+      // Navigate after successful save
       navigate(`/events/${eventid}`);
     } catch (error) {
       console.error("Error saving the event: ", error);
-      // Show an error message to the user, or handle it appropriately
+      // Show an error message to the user
       if (error.message.includes('coordinates')) {
         setAddressError("Failed to get coordinates for the address. Please check the address and try again.");
       } else {

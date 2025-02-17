@@ -125,20 +125,18 @@ export const EventDetails = ({ currentUser }) => {
       </div>
       <div className="btn-container">
         {event.user?.id === currentUser.id && (
-          <button
+          <><button
             className="btn btn-edit"
             onClick={() => {
               navigate(`/events/${event.id}/edit`);
             }}
           >
             Edit
-          </button>
-        )}
-        {event.user?.id === currentUser.id && (
-          <button className="btn btn-warning" onClick={handleDelete}>
+          </button><button className="btn btn-warning" onClick={handleDelete}>
             Delete
-          </button>
+          </button></>
         )}
+       
         {currentUser.isOrganizer === false && !isAttending && (
           <button className="btn btn-info" onClick={handleIAmIn}>
             I'm in!
