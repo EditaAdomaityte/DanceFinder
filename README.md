@@ -20,7 +20,7 @@ This application aims to centralize and simplify the discovery of Latin dance ev
 
 ## Installation Instructions 
 
-1. Clone this repository and change to the directory in the terminal. cd into the directory that was created and run npm commands(run following commands one at the time).
+1. Clone this repository and cd into the directory that was created, run npm commands(run following commands one at the time).
 ```sh
 git clone git@github.com:EditaAdomaityte/DanceFinder.git
 cd DanceFinder
