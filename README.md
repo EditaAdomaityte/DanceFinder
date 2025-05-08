@@ -25,7 +25,7 @@ This application aims to centralize and simplify the discovery of Latin dance ev
 git clone git@github.com:EditaAdomaityte/DanceFinder.git
 cd DanceFinder
 npm install
-npm start
+npm dev run
 ```
 2. Access the data. In a new terminal
 ```sh
