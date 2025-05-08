@@ -5,7 +5,7 @@
       "name": "Alice Johnson",
       "city": "New York",
       "stateId": 32,
-      "email": "alice.johnson@email.com",
+      "email": "alice.johnson123@email.com",
       "isOrganizer": true
     },
     {
@@ -119,6 +119,14 @@
       "stateId": 10,
       "email": "oscar.king@email.com",
       "isOrganizer": true
+    },
+    {
+      "email": "EA@EA.com",
+      "name": "EA",
+      "stateId": 42,
+      "city": "Knoxville",
+      "isOrganizer": false,
+      "id": 16
     }
   ],
   "events": [
@@ -249,6 +257,22 @@
       "price": 40,
       "ageId": 3,
       "description": "Brief Description"
+    },
+    {
+      "title": "Rhythms of the Night: Kizomba & Bachata Fusion",
+      "venue": "Artistic Fusion Dance Academy",
+      "venueLink": "https://www.artistic-fusion.com/",
+      "address": "5660 W 88th Ave",
+      "city": "Westminster",
+      "stateId": 6,
+      "longitude": -105.05974343656513,
+      "latitude": 39.855158200000005,
+      "date": "08/15/2025",
+      "userId": 1,
+      "price": 0,
+      "ageId": 1,
+      "description": "Join us for an electrifying night of Kizomba and Bachata! Dance the night away with live music, exciting performances, and a vibrant atmosphere. Whether you're a beginner or expert, this is the perfect event to connect and groove!",
+      "id": 9
     }
   ],
   "ages": [
@@ -355,11 +379,6 @@
     },
     {
       "userId": 2,
-      "eventId": 3,
-      "id": 16
-    },
-    {
-      "userId": 2,
       "eventId": 4,
       "id": 17
     },
@@ -367,6 +386,21 @@
       "userId": 2,
       "eventId": 1,
       "id": 18
+    },
+    {
+      "userId": 2,
+      "eventId": 9,
+      "id": 19
+    },
+    {
+      "userId": 16,
+      "eventId": 2,
+      "id": 20
+    },
+    {
+      "userId": 16,
+      "eventId": 9,
+      "id": 21
     }
   ],
   "states": [
@@ -656,6 +690,16 @@
       "danceTypeId": 3,
       "eventId": 8,
       "id": 20
+    },
+    {
+      "danceTypeId": 1,
+      "eventId": 9,
+      "id": 21
+    },
+    {
+      "danceTypeId": 2,
+      "eventId": 9,
+      "id": 22
     }
   ]
 }

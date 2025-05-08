@@ -22,14 +22,14 @@ export const EventMap = () => {
     // container style
     const containerStyle = {
         width: '100%',
-        height: '800px'  // height
+        height: '1000px'  // height
     };
 
     return (
         <div className="map-container" style={{ width: '100%', height: '500px' }}>
             <LoadScript googleMapsApiKey="AIzaSyDonHnNDAcDpmFCYwUsLiDWluSPlAcd2p0">
                 <GoogleMap
-                    center={{ lat: 40.7128, lng: -74.0060 }}
+                    center={{ lat: 39.091817, lng: -94.57169 }}
                     zoom={5}
                     mapContainerStyle={containerStyle}
                 >

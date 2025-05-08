@@ -131,7 +131,7 @@ export const EditEventForm = ({ currentUser }) => {
 
   return (
     <form className="form-group">
-      <h2>Edi Event</h2>
+      <h2>Edit Event</h2>
       <fieldset>
           <label>
             Title:
