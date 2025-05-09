@@ -73,7 +73,7 @@ export const EventDetails = ({ currentUser }) => {
       <header className="event-header">{event.title}</header>
       <div>
         <span className="event-info">Organizer:</span>
-        <Link to={`/profile/${event.userId}`}>{event.user?.name}</Link>
+        <Link to={`/profile/${event.userId}`}>{event?.user?.name}</Link>
       </div>
       <div>
         <span className="event-info">Venue:</span>
@@ -106,9 +106,9 @@ export const EventDetails = ({ currentUser }) => {
         <span className="event-info">Types of Dances:</span>
         {dances.map((dance, index) => {
           return (
-            <ul key={dance.danceType.id}>
-             <li> <Link  to={`/dances/${dance.danceType.id}`}>
-                {dance.danceType.type}
+            <ul key={dance?.danceType?.id}>
+             <li> <Link  to={`/dances/${dance?.danceType?.id}`}>
+                {dance.danceType?.type}
               </Link></li>
               {index<dance.length-1 &&','}{/* Adds a comma except after the last link */}
             </ul>

@@ -48,13 +48,13 @@ export const EventList = ({ currentUser }) => {
     if (selectedState !== "Select State") {
       filtered = filtered.filter((event) => {
         const state = allStates.find((s) => s.id === event.stateId);
-        return state.state_name === selectedState;
+        return state?.state_name === selectedState;
       });
     }
     if (selectedAge !== "Select Age Group") {
       filtered = filtered.filter((event) => {
         const thisAge = allAges.find((a) => a.id === event.ageId);
-        return thisAge.name === selectedAge;
+        return thisAge?.name === selectedAge;
       });
     }
     if (selectedDanceType !== "Select Dance") {

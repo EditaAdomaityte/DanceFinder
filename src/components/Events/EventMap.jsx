@@ -57,7 +57,7 @@ export const EventMap = () => {
                                             <h3 >{event.title}</h3>
                                             <p>{event.date}</p>
                                             <p>{event.time}</p>
-                                            <p>{event.city},{event.state.state_name}</p>
+                                            <p>{event.city},{event.state?.state_name}</p>
                                             <p>${event.price}</p>
                                             <div>
                                                 <button 

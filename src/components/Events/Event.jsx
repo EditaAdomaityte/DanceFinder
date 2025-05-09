@@ -18,7 +18,7 @@ export const Event=({event,currentUser})=>{
                     Location: {event.city}, {event.state?.state_name}
                 </div>
                 <div className="event-info">
-                   # of people attending : {event.attendance.length}
+                   # of people attending : {event?.attendance?.length}
                 </div>
             </div> </Link>
             <div className="btn-container">
