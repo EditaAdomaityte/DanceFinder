@@ -41,7 +41,6 @@ export const EditEventForm = ({ currentUser }) => {
   }, [eventid]);
 
 
-
   const handleDanceChange = (event) => {
     setDancesChanged(true);
 

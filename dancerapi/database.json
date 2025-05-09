@@ -2,9 +2,9 @@
   "users": [
     {
       "id": 1,
-      "name": "Alice Johnson",
+      "name": "Alice Johnsons",
       "city": "New York",
-      "stateId": 32,
+      "stateId": "32",
       "email": "alice.johnson123@email.com",
       "isOrganizer": true
     },
@@ -228,24 +228,8 @@
     },
     {
       "id": 7,
-      "title": "as",
-      "venue": "SalsaKnox Dance Company",
-      "venueLink": "https://www.salsaknox.com/the-knoxville-friday-salsa-party",
-      "address": "2201 Kerns Rising Way",
-      "city": "Knoxville",
-      "stateId": 42,
-      "date": "08-10-2025",
-      "userId": 3,
-      "price": 1,
-      "ageId": 1,
-      "description": "as",
-      "latitude": "35.95505",
-      "longitude": "-83.91395"
-    },
-    {
-      "id": 8,
-      "title": "Latin  Dance Extravaganza",
-      "venue": "Millennium Dance Complex Nashville",
+      "title": "Latin  Dance Extravaganzas",
+      "venue": "Millennium Dance Complex Nashvilles",
       "venueLink": "https://mdcnashville.com/",
       "address": "505 Tillman St",
       "city": "Memphis",
@@ -255,7 +239,7 @@
       "date": "08/14/2025",
       "userId": 1,
       "price": 40,
-      "ageId": 3,
+      "ageId": 1,
       "description": "Brief Description"
     },
     {
@@ -272,7 +256,7 @@
       "price": 0,
       "ageId": 1,
       "description": "Join us for an electrifying night of Kizomba and Bachata! Dance the night away with live music, exciting performances, and a vibrant atmosphere. Whether you're a beginner or expert, this is the perfect event to connect and groove!",
-      "id": 9
+      "id": 8
     }
   ],
   "ages": [
@@ -343,11 +327,6 @@
       "eventId": 3
     },
     {
-      "id": 6,
-      "userId": 12,
-      "eventId": 3
-    },
-    {
       "id": 8,
       "userId": 12,
       "eventId": 4
@@ -388,18 +367,13 @@
       "id": 18
     },
     {
-      "userId": 2,
-      "eventId": 9,
-      "id": 19
-    },
-    {
       "userId": 16,
       "eventId": 2,
       "id": 20
     },
     {
-      "userId": 16,
-      "eventId": 9,
+      "userId": 12,
+      "eventId": 2,
       "id": 21
     }
   ],
@@ -667,21 +641,6 @@
       "id": 15
     },
     {
-      "danceTypeId": 4,
-      "eventId": 7,
-      "id": 16
-    },
-    {
-      "danceTypeId": 5,
-      "eventId": 7,
-      "id": 17
-    },
-    {
-      "danceTypeId": 2,
-      "eventId": 7,
-      "id": 18
-    },
-    {
       "danceTypeId": 5,
       "eventId": 8,
       "id": 19
@@ -692,14 +651,24 @@
       "id": 20
     },
     {
+      "danceTypeId": 4,
+      "eventId": 7,
+      "id": 21
+    },
+    {
+      "danceTypeId": 5,
+      "eventId": 7,
+      "id": 22
+    },
+    {
       "danceTypeId": 1,
       "eventId": 9,
-      "id": 21
+      "id": 23
     },
     {
       "danceTypeId": 2,
       "eventId": 9,
-      "id": 22
+      "id": 24
     }
   ]
 }

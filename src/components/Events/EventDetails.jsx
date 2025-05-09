@@ -64,13 +64,13 @@ export const EventDetails = ({ currentUser }) => {
         navigate("/events/");
       });
   };
-  const fullAddress = `${event.venue}+${event.address}+ ${event.city}+ ${event.state?.state_name}`;
+  const fullAddress = `${event?.venue}+${event?.address}+ ${event?.city}+ ${event?.state?.state_name}`;
 
-
+  console.log("Event object:", event);
 
   return (
     <section className="event">
-      <header className="event-header">{event.title}</header>
+      <header className="event-header">{event?.title}</header>
       <div>
         <span className="event-info">Organizer:</span>
         <Link to={`/profile/${event.userId}`}>{event?.user?.name}</Link>
