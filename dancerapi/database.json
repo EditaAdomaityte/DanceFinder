@@ -257,6 +257,22 @@
       "ageId": 1,
       "description": "Join us for an electrifying night of Kizomba and Bachata! Dance the night away with live music, exciting performances, and a vibrant atmosphere. Whether you're a beginner or expert, this is the perfect event to connect and groove!",
       "id": 8
+    },
+    {
+      "title": "Rock The Knox",
+      "venue": "Hilton Knoxville",
+      "venueLink": "https://www.hilton.com/en/hotels/knxkhhf-hilton-knoxville/?SEO_id=GMB-AMER-HH-KNXKHHF&y_source=1_MTIyMDkxNy03MTUtbG9jYXRpb24ud2Vic2l0ZQ%3D%3D",
+      "address": "501 W Church Ave",
+      "city": "Knoxville",
+      "stateId": 42,
+      "longitude": -83.9198437,
+      "latitude": 35.9625759,
+      "date": "08/01/2025",
+      "userId": 1,
+      "price": 50,
+      "ageId": 1,
+      "description": "Rock the Knox is a high-energy Latin dance event in Knoxville featuring salsa and bachata lessons, live DJs, and a vibrant dance floor. Perfect for all levels, it offers a fun night of music, dancing, and cultural celebration.",
+      "id": 9
     }
   ],
   "ages": [
@@ -357,16 +373,6 @@
       "id": 14
     },
     {
-      "userId": 2,
-      "eventId": 4,
-      "id": 17
-    },
-    {
-      "userId": 2,
-      "eventId": 1,
-      "id": 18
-    },
-    {
       "userId": 16,
       "eventId": 2,
       "id": 20
@@ -375,6 +381,16 @@
       "userId": 12,
       "eventId": 2,
       "id": 21
+    },
+    {
+      "userId": 2,
+      "eventId": 2,
+      "id": 22
+    },
+    {
+      "userId": 2,
+      "eventId": 6,
+      "id": 23
     }
   ],
   "states": [
