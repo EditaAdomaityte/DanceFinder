@@ -1,139 +1,173 @@
-/* Container for all dances */
-.dances {
-    padding: 20px;
-    font-family: "Arial", sans-serif;
-    background-color:#ffffff; /* Light background for the whole dances section */
-    color: #333; /* Dark color for text */
-  }
-  
-  /* Styling each individual dance */
+
+
+
+body { 
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1504609813442-a8924e83f76e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size:cover;  /* This ensures the image covers the whole page */
+  background-position: center;  /* Centers the image */
+  background-repeat: no-repeat;
+}
+
+
+/* Main container styles */
+.dance {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #c1a3a3c4;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Flex container for dance items */
+.dance > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+/* Individual dance item in list */
+.dance > div > div {
+  flex: 1 1 300px;
+  max-width: 400px;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f8f6f9;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  border: 1px solid #634f65;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.dance > div > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(99, 79, 101, 0.3);
+  background-color: #f0ebf1;
+  border-color: #231d29;
+}
+
+/* Header styles */
+.dance-header {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Main title style */
+.dance h2 {
+  font-size: 2.2rem;
+  color: #fdfdfd;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  width: 100%;
+}
+
+/* Dance item header */
+.header {
+  margin-bottom: 1rem;
+}
+
+.header h3 {
+  font-size: 1.8rem;
+  color: #634f65;
+  margin: 0;
+  padding: 1rem 0;
+  font-weight: bold;
+  position: relative;
+}
+
+/* Link styles with enhanced hover effect */
+.header a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.header a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #634f65;
+  transition: width 0.3s ease;
+}
+
+.header a:hover {
+  color: #231d29;
+}
+
+.header a:hover::after {
+  width: 100%;
+}
+
+/* Info section styles */
+.dance-info {
+  font-weight: bold;
+  color: #634f65;
+  margin-right: 0.5rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 18px;
+}
+
+/* Regular text style */
+.dance div {
+  color: #231d29;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
   .dance {
-    border: 1px solid #716969; /* Light border around each dance */
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    background-color: #dededd; /* White background for each dance */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: transform 0.2s, box-shadow 0.2s ease; /* Add smooth hover effect */
+    margin: 1rem;
+    padding: 1rem;
   }
-  
-  /* Add hover effect for dance */
-  .dance:hover {
-    transform: translateY(-5px); /* Slightly lift the dance on hover */
-    box-shadow: 0 5px 15px rgba(44, 15, 15, 0.1); /* Increase shadow on hover */
-  }
-  
-  /* Styling for the dance title */
-  .dance-header h3 {
-    font-size: 1em;
-    margin: 0;
-    color: #a89cb6; /* Dark blue-gray color for title */
-    font-weight: bold;
-  }
-  
-  /* Styling for the topic label */
-  .dance-topic {
-    margin-top: 10px;
-    color: #45404b; /* Bright blue for topic */
-    font-size: 1em;
-    font-weight: bold;
-  }
-  
-  /* Styling for the likes count */
-  .dance-likes {
-    margin-top: 5px;
-    color: #3f202d; /* Red color for likes count to make it stand out */
-    font-size: 0.9em;
-  }
-  
-  /* Optional: Style the main heading */
-  .dances h2 {
-    font-size: 2.2em;
-    color: #344556; /* Dark gray-blue for the heading */
-    margin-bottom: 20px;
-    text-align: left; /* Center the main heading */
-  }
-  
-  /* Optional: Add some padding around the dances */
-  .dances .dance + .dance {
-    border-top: 2px solid #ecf0f1; /* Add a subtle border between dances */
-  }
-  
-  /* Container for the filter */
-  .filter {
-    display: flex;
-    flex-direction: row;
-    gap: 20px; /* Space between input and select */
-    padding: 20px;
-    max-width: px; /* Limits the width of the filter */
-    margin: 0 auto; /* Centers the filter */
-    background-color: #3e3345; /* Light background */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  /* Styling for the search input */
-  .dance-search {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s ease;
-  }
-  
-  .dance-search:focus {
-    border-color: #4c7aaf; /* Green border on focus */
-  }
-  
-  /* Styling for the select dropdown */
-  select {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
-  }
-  
-  /* Focus effect for the select dropdown */
-  select:focus {
-    border-color: #4c61af; /* Green border on focus */
-  }
-  
-  /* Styling for the option items */
-  option {
-    padding: 10px;
-    font-size: 16px;
-  }
-  
-  section.dance {
-    margin: 3rem;
-  }
-  
-  .dance-info {
-    font-weight: 600;
-    color: #4a5568;
-    min-width: 80px;
-    margin-right: 15px;
-  }
-  
-  .dance-footer {
-    margin: 1rem 0 0.25rem 0;
-    font-style: oblique;
-  }
-  
+
   .dance-header {
-    font-size: larger;
-    font-weight: 700;
-    line-height: 3rem;
-    color: #4a5568;
+    font-size: 2rem;
   }
-  
-  .btn-container {
-    display: flex;
-    justify-content: flex-end;
-    color: #3f202d;
+
+  .header h3 {
+    font-size: 1.5rem;
   }
+
+  .dance-info {
+    font-size: 16px;
+  }
+
+  .dance > div > div {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+}
+
+.dance-image{
+  width: 500px;  /* Set the width to a fixed value */
+  height: 300px; /* Set the height to a fixed value */
+  object-fit: cover; /* Optional: to ensure the image covers the area without distortion */
+  border: #634f65;
+  border-radius: 5%;
   
+}
+.dance-info1 {
+  background-color: #ffffff;
+  font-weight:lighter;
+  color: #ffffff;
+  margin-right: 0.5rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 20px;
+}

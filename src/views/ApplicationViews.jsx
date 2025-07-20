@@ -12,6 +12,7 @@ import { EditProfileForm } from "../components/Forms/EditProfileForm";
 import { OrganizerList } from "../components/Users/OrganizerList";
 import { DanceList } from "../components/Dances/DanceList";
 import { DanceDetails } from "../components/Dances/DanceDetails";
+import { EventMap } from "../components/Events/EventMap.jsx";
 
 export const ApplicationViews = (Authorized) => {
   const [currentUser, setCurrentUser] = useState({});
@@ -28,20 +29,20 @@ export const ApplicationViews = (Authorized) => {
         path="/"
         element={
           <>
-            <NavBar currentUser={currentUser}/>
+            <NavBar currentUser={currentUser} />
             <Outlet />
           </>
         }
       >
         <Route index element={<Welcome />} />
         <Route path="events">
-          <Route index element={<EventList currentUser={currentUser}/>} />
+          <Route index element={<EventList currentUser={currentUser} />} />
           <Route
-            path=":eventId"
+            path=":eventid"
             element={<EventDetails currentUser={currentUser} />}
           />
           <Route
-            path=":eventId/edit"
+            path=":eventid/edit"
             element={<EditEventForm currentUser={currentUser} />}
           />
           <Route
@@ -49,6 +50,7 @@ export const ApplicationViews = (Authorized) => {
             element={<MyEvents currentUser={currentUser} />}
           />
         </Route>
+        <Route path="eventmap" element={<EventMap/>}/>
         <Route
           path="newevent"
           element={<NewEventForm currentUser={currentUser} />}

@@ -1,21 +1,30 @@
 import { useEffect, useState } from "react";
 import "./Forms.css";
-import { getAllDances } from "../../services/danceServices";
-import { getAllAges, getAllStates } from "../../services/extraServices";
+import {
+  createDanceInEvent,
+  deleteDanceInEventsByEventId,
+  getAllDances,
+  getDancesByEventId,
+} from "../../services/danceServices";
+import { getAllAges, getAllStates, getCoordinates } from "../../services/extraServices";
 import { editEvent, getEventById } from "../../services/eventServices";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const EditEventForm = ({currentUser}) => {
+export const EditEventForm = ({ currentUser }) => {
   const [thisEvent, setEvent] = useState({});
   const [allDanceTypes, setAllDanceTypes] = useState([]);
   const [allAges, setAllAges] = useState([]);
   const [states, setAllStates] = useState([]);
+  const [currentDances, setCurrentDances] = useState([]);
+  const [dancesChanged, setDancesChanged] = useState(false);
+  const [addressError, setAddressError] = useState("");
+  const [isAddressChanged, setIsAddressChanged] = useState(false);
 
-  const { eventId } = useParams();
-  const navigate = useNavigate(); 
+  const { eventid } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getEventById(eventId).then((data) => {
+    getEventById(eventid).then((data) => {
       const eventObj = data[0];
       setEvent(eventObj);
     });
@@ -28,35 +37,101 @@ export const EditEventForm = ({currentUser}) => {
     getAllStates().then((stateArray) => {
       setAllStates(stateArray);
     });
-  }, []);
+    getDancesByEventId(eventid).then((array) => setCurrentDances(array));
+  }, [eventid]);
 
-  const handleSave = (event) => {
+
+  const handleDanceChange = (event) => {
+    setDancesChanged(true);
+
+    const targetDanceId = Number(event.target.id);
+    const isDanceAlreadySelected = currentDances.some(
+      (currentDance) => currentDance.danceTypeId === targetDanceId
+    );
+
+    if (isDanceAlreadySelected) {
+      // Remove the dance if it's already selected
+      setCurrentDances((prevDances) =>
+        prevDances.filter((dance) => dance.danceTypeId !== targetDanceId)
+      );
+    } else {
+      // Add the dance if it's not already selected
+      const newDance = {
+        eventId: parseInt(eventid),
+        danceTypeId: targetDanceId,
+      };
+
+      setCurrentDances((prevDances) => [...prevDances, newDance]);
+    }
+  };
+
+  const handleAddressChange = (field, value) => {
+    setIsAddressChanged(true);
+    setAddressError("");
+    const copy = { ...thisEvent };
+    copy[field] = value;
+    setEvent(copy);
+  };
+
+  const handleSave = async (event) => {
     event.preventDefault();
+    setAddressError("")
+
+    try {
+      let coordinates = {
+        latitude: thisEvent.latitude,
+        longitude: thisEvent.longitude
+      };
+       // Only get new coordinates if address-related fields have changed
+       if (isAddressChanged) {
+        const stateName = states.find(s => s.id === parseInt(thisEvent.stateId))?.state_name;
+        coordinates = await getCoordinates(thisEvent.address, thisEvent.city, stateName);
+      }
+
     const editedEvent = {
       id: thisEvent.id,
       title: thisEvent.title,
       venue: thisEvent.venue,
+      venueLink: thisEvent.venueLink,
       address: thisEvent.address,
       city: thisEvent.city,
-      stateId: thisEvent.stateId,
+      stateId: parseInt(thisEvent.stateId),
+      longitude: coordinates.longitude,
+      latitude: coordinates.latitude,
       date: thisEvent.date,
       userId: currentUser.id,
-      price: thisEvent.price,
-      ageId: thisEvent.ageId,
-      description: thisEvent.description,
-      danceTypeId: thisEvent.danceTypeId,
+      price: parseInt(thisEvent.price),
+      ageId: parseInt(thisEvent.ageId),
+      description: thisEvent.description
     };
 
-    editEvent(editedEvent).then(() => {
-      navigate(`/events/${eventId}`);
-    });
+    
+      // Update the event first
+      await editEvent(editedEvent);
+
+      // Then delete existing dances associated with the event
+      await deleteDanceInEventsByEventId(eventid);
+
+      // Create the new dances in the event
+      await createDanceInEvent(currentDances);
+
+      // Navigate after successful save
+      navigate(`/events/${eventid}`);
+    } catch (error) {
+      console.error("Error saving the event: ", error);
+      // Show an error message to the user
+      if (error.message.includes('coordinates')) {
+        setAddressError("Failed to get coordinates for the address. Please check the address and try again.");
+      } else {
+        setAddressError("There was an issue saving your event. Please try again later.");
+      }
+    }
   };
 
   return (
     <form className="form-group">
-      <h2>New Event</h2>
+      <h2>Edit Event</h2>
       <fieldset>
-        <div className="form-group">
           <label>
             Title:
             <input
@@ -70,10 +145,9 @@ export const EditEventForm = ({currentUser}) => {
               }}
             />
           </label>
-        </div>
+
       </fieldset>{" "}
       <fieldset>
-        <div className="form-group">
           <label>
             Venue:
             <input
@@ -87,54 +161,51 @@ export const EditEventForm = ({currentUser}) => {
               }}
             />
           </label>
-        </div>
       </fieldset>{" "}
       <fieldset>
-        <div className="form-group">
+          <label>
+            Venue link:
+            <input
+              className="form-control"
+              type="text"
+              value={thisEvent.venueLink ? thisEvent.venueLink : ""}
+              onChange={(event) => {
+                const copy = { ...thisEvent };
+                copy.venueLink = event.target.value;
+                setEvent(copy);
+              }}
+            />
+          </label>
+      </fieldset>
+      <fieldset>
           <label>
             Address:
             <input
               className="form-control"
               type="text"
               value={thisEvent.address ? thisEvent.address : ""}
-              onChange={(event) => {
-                const copy = { ...thisEvent };
-                copy.address = event.target.value;
-                setEvent(copy);
-              }}
+              onChange={(event) => handleAddressChange('address', event.target.value)}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             City:
             <input
               className="form-control"
               type="text"
               value={thisEvent.city ? thisEvent.city : ""}
-              onChange={(event) => {
-                const copy = { ...thisEvent };
-                copy.city = event.target.value;
-                setEvent(copy);
-              }}
+              onChange={(event) =>  handleAddressChange('city', event.target.value)}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             State:
             <select
               value={thisEvent.stateId}
               name="stateId"
-              onChange={(event) => {
-                const copy = { ...thisEvent};
-                copy[event.target.name] = event.target.value;
-                setEvent(copy)
-              }}
+              onChange={(event) => handleAddressChange('stateId', event.target.value)}
             >
               <option value="">Select State</option>
               {states.map((state) => (
@@ -144,10 +215,9 @@ export const EditEventForm = ({currentUser}) => {
               ))}
             </select>
           </label>
-        </div>
       </fieldset>
+      {addressError && <div className="error-message">{addressError}</div>}
       <fieldset>
-        <div className="form-group">
           <label>
             Date:
             <input
@@ -161,10 +231,8 @@ export const EditEventForm = ({currentUser}) => {
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             Price:
             <input
@@ -178,10 +246,8 @@ export const EditEventForm = ({currentUser}) => {
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             Age Group:
             <select
@@ -190,7 +256,7 @@ export const EditEventForm = ({currentUser}) => {
               onChange={(event) => {
                 const copy = { ...thisEvent };
                 copy[event.target.name] = event.target.value;
-                setEvent(copy)
+                setEvent(copy);
               }}
             >
               <option value="Select Age">Select Age</option>
@@ -201,10 +267,9 @@ export const EditEventForm = ({currentUser}) => {
               ))}
             </select>
           </label>
-        </div>
+      
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <label>
             Description:
             <input
@@ -212,43 +277,36 @@ export const EditEventForm = ({currentUser}) => {
               type="text"
               value={thisEvent.description ? thisEvent.description : ""}
               onChange={(event) => {
-                const copy = { ...thisEvent};
+                const copy = { ...thisEvent };
                 copy.description = event.target.value;
                 setEvent(copy);
               }}
             />
           </label>
-        </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <label>
-            Dance Type:
-            <select
-              value={thisEvent.danceTypeId}
-              name="danceTypeId"
-              onChange={(event) => {
-                const copy = { ...thisEvent };
-                copy[event.target.name] = event.target.value;
-                setEvent(copy)
-              }}
-            >
-              <option value="Select a Dance Type">Select Dance Type</option>
-              {allDanceTypes.map((dance) => (
-                <option key={dance.id} value={dance.id}>
-                  {dance.type}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
+          <label>Types of Dances:
+          {allDanceTypes.map((dance) => {
+            return (
+              <div key={dance.id}>
+                <input
+                  type="checkbox"
+                  id={dance.id}
+                  checked={currentDances.some(
+                    (currentDance) => currentDance.danceTypeId === dance.id
+                  )}
+                  onChange={handleDanceChange}
+                />
+                {dance.type}
+              </div>
+            );
+          })}</label>
       </fieldset>
       <fieldset>
-        <div className="form-group">
           <button className="form-btn btn-primary" onClick={handleSave}>
             Save Changes
           </button>
-        </div>
+        
       </fieldset>
     </form>
   );

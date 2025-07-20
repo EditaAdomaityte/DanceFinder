@@ -37,7 +37,7 @@ export const Login = () => {
           <h1>💃Dance Finder🕺</h1>
           <h2>Please sign in</h2>
           <fieldset>
-            <div className="form-group">
+            
               <input
                 type="email"
                 value={email}
@@ -47,14 +47,14 @@ export const Login = () => {
                 required
                 autoFocus
               />
-            </div>
+            
           </fieldset>
           <fieldset>
-            <div className="form-group">
-              <button className="login-btn btn-info" type="submit">
+         
+              <button className="btn btn-primary" type="submit">
                 Sign in
               </button>
-            </div>
+            
           </fieldset>
         </form>
       </section>

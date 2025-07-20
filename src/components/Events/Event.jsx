@@ -3,7 +3,7 @@ import "./Events.css"
 
 export const Event=({event,currentUser})=>{
     const navigate=useNavigate()
-    console.log(currentUser)
+
     return(
         <div className="event">
             <Link to ={`/events/${event.id}`} key={event.id}>
@@ -18,7 +18,7 @@ export const Event=({event,currentUser})=>{
                     Location: {event.city}, {event.state?.state_name}
                 </div>
                 <div className="event-info">
-                   # of people attending : {event.attendance.length}
+                   # of people attending : {event?.attendance?.length}
                 </div>
             </div> </Link>
             <div className="btn-container">

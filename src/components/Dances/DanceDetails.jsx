@@ -8,26 +8,31 @@ export const DanceDetails = () => {
   const [dance, setDance] = useState({});
 
   const { danceId } = useParams();
-  console.log(danceId);
+
 
   useEffect(() => {
     getDancesById(danceId).then((data) => {
       const danceObj = data[0];
-      console.log(data);
       setDance(danceObj);
     });
   }, [danceId]);
 
   return (
     <section className="dance">
+      
       <header className="dance-header">{dance.type}</header>
-      <div>
-        <span className="dance-info">Origin:</span>
-        {dance.origin}
+      <div className="dance-info1">
+        <ul>
+        <li><span className="dance-info" >Origin:</span>
+        {dance.origin}</li>
+      
+        <li><span className="dance-info"  >Description:</span>
+        {dance.description}</li></ul>
       </div>
-      <div>
-        <span className="dance-info">Description:</span>
-        {dance.description}
+      <div className="picture">
+        {dance.picture && (
+          <img src={dance.picture} alt={dance.type} className="dance-image" />
+        )}
       </div>
     </section>
   );

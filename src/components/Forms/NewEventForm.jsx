@@ -1,15 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import "./Forms.css";
 import { useEffect, useState } from "react";
-import { getAllDances } from "../../services/danceServices";
-import { getAllAges, getAllStates } from "../../services/extraServices";
+import { createDanceInEvent, getAllDances } from "../../services/danceServices";
+import { getAllAges, getAllStates, getCoordinates } from "../../services/extraServices";
 import { createNewEvent } from "../../services/eventServices";
 
 export const NewEventForm = ({ currentUser }) => {
   const navigate = useNavigate();
 
   const [allDanceTypes, setAllDanceTypes] = useState([]);
-  const [selectedDanceType, setSelectedDanceType] = useState(0);
   const [allAges, setAllAges] = useState([]);
   const [selectedAge, setSelectedAge] = useState(0);
   const [title, setTitle] = useState("");
@@ -17,10 +16,14 @@ export const NewEventForm = ({ currentUser }) => {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [states, setAllStates] = useState([]);
-  const [selectedState, setSelectedState]=useState(0)
+  const [selectedState, setSelectedState] = useState(0);
   const [date, setDate] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [link, setLink] = useState("");
+  const [selectedDances, setSelectedDances] = useState([]);
+  const [coordinates, setCoordinates] = useState({ latitude: null, longitude: null });
+  const [addressError, setAddressError] = useState("");
 
   useEffect(() => {
     getAllDances().then((danceArray) => {
@@ -34,179 +37,240 @@ export const NewEventForm = ({ currentUser }) => {
     });
   }, []);
 
-  const handleSaveEvent=(event)=>{
-    event.preventDefault();
-
-    const createdEvent={
-        title: title,
-        venue: venue,
-        address: address,
-        city: city,
-        stateId: parseInt(selectedState),
-        date: date,
-        userId: currentUser.id,
-        price:parseInt(price),
-        ageId: parseInt(selectedAge),
-        description: description,
-        danceTypeId:parseInt(selectedDanceType),
+  const handleDanceChange = (event) => {
+    const foundDance = selectedDances.find((selectedDance) => {
+      return selectedDance.id === Number(event.target.id);
+    });
+    if (foundDance) {
+      const newCurrentDance = selectedDances.filter((selectedDance) => {
+        return selectedDance.id !== foundDance.id;
+      });
+      setSelectedDances(newCurrentDance);
+    } else {
+      const newDance = {
+        danceTypeId: Number(event.target.id),
+      };
+      const addedDances = [...selectedDances, newDance];
+      setSelectedDances(addedDances);
     }
-    createNewEvent(createdEvent).then(()=>{
-        navigate("/events/myevents")
-    })
+  };
+  const handleSaveEvent = async (event) => {
+    event.preventDefault();
+    setAddressError("");
+
+    try {
+      // Get coordinates before creating the event
+      const coords = await getCoordinates(
+        address,
+        city,
+        states.find(s => s.id === parseInt(selectedState))?.state_name
+      );
+
+    const createdEvent = {
+      title: title,
+      venue: venue,
+      venueLink: link,
+      address: address,
+      city: city,
+      stateId: parseInt(selectedState),
+      longitude: coords.longitude,
+      latitude: coords.latitude,
+      date: date,
+      userId: currentUser.id,
+      price: parseInt(price),
+      ageId: parseInt(selectedAge),
+      description: description
+    };
+    const NewEvent = await createNewEvent(createdEvent);
+
+    if ( selectedDances.length > 0 && NewEvent.id) {
+      const dancesInEventArray = selectedDances.map((dance) => ({
+        eventId: NewEvent.id,
+        danceTypeId: dance.danceTypeId,
+      }));
+      await createDanceInEvent(dancesInEventArray);
+    }
+    navigate(`/events/myevents`);
+  } catch (error) {
+    setAddressError("Failed to get coordinates for the address. Please check the address and try again.");
+    console.error("Geocoding error:", error);
   }
+};
 
   return (
     <form className="form-group">
-        <h2>New Event</h2>
-
-        <fieldset>
-            <div className="form-group">
-                <label>Title:
-                    <input 
-                        className="form-control"
-                        type="text"
-                        onChange={(event)=>{
-                            const newTitle=event.target.value;
-                            setTitle(newTitle)
-                        }}
-                    />
-                </label>
+      <h2>New Event</h2>
+      <fieldset>
+        <label>
+          Title:
+          <input
+            placeholder="Enter the Title of the Event"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newTitle = event.target.value;
+              setTitle(newTitle);
+            }}
+          />
+        </label>
+      </fieldset>{" "}
+      <fieldset>
+        <label>
+          Venue:
+          <input
+            placeholder="Enter Venue Name"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newVenue = event.target.value;
+              setVenue(newVenue);
+            }}
+          />
+        </label>
+      </fieldset>
+      <fieldset>
+        <label>
+          Venue link:
+          <input
+            placeholder="Enter Venue Link"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newLink = event.target.value;
+              setLink(newLink);
+            }}
+          />
+        </label>
+      </fieldset>
+      <fieldset>
+        <label>
+          Address:
+          <input
+            placeholder="Street Address"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newAddress = event.target.value;
+              setAddress(newAddress);
+            }}
+          />
+        </label>
+      </fieldset>
+      <fieldset>
+        <label>
+          City:
+          <input
+            placeholder="City name"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newCity = event.target.value;
+              setCity(newCity);
+            }}
+          />
+        </label>
+      </fieldset>
+      <fieldset>
+        <label>
+          State:
+          <select
+            value={selectedState}
+            onChange={(event) => setSelectedState(event.target.value)}
+          >
+            <option value="Select a State">Select State</option>
+            {states.map((state) => (
+              <option key={state.id} value={state.id}>
+                {state.state_name}
+              </option>
+            ))}
+          </select>
+        </label>
+        {addressError && <div className="error-message">{addressError}</div>}
+      </fieldset>
+      <fieldset>
+        <label>
+          Date:
+          <input
+            placeholder="Month/day/year"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newDate = event.target.value;
+              setDate(newDate);
+            }}
+          />
+        </label>
+      </fieldset>
+      <fieldset>
+        <label>
+          Price:
+          <input
+            placeholder="Price for Event"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newPrice = event.target.value;
+              setPrice(newPrice);
+            }}
+          />
+        </label>
+      </fieldset>
+      <fieldset>
+        <label>
+          Age Group:
+          <select
+            value={selectedAge}
+            onChange={(event) => setSelectedAge(event.target.value)}
+          >
+            <option value="Select Age">Select Age</option>
+            {allAges.map((age) => (
+              <option key={age.id} value={age.id}>
+                {age.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label>
+          Description:
+          <input
+            placeholder="Brief description of event"
+            className="form-control"
+            type="text"
+            onChange={(event) => {
+              const newDescription = event.target.value;
+              setDescription(newDescription);
+            }}
+          />
+        </label>
+      </fieldset>
+      <fieldset>
+        <label>Dance Types:</label>
+        {allDanceTypes.map((dance) => {
+          return (
+            <div key={dance.id} className="checkbox">
+              <label htmlFor={dance.id}>
+                <input
+                  type="checkbox"
+                  id={dance.id}
+                  onChange={handleDanceChange}
+                />
+                {dance.type}
+              </label>
             </div>
-        </fieldset> <fieldset>
-            <div className="form-group">
-                <label>Venue:
-                    <input 
-                        className="form-control"
-                        type="text"
-                        onChange={(event)=>{
-                            const newVenue=event.target.value;
-                            setVenue(newVenue)
-                        }}
-                    />
-                </label>
-            </div>
-        </fieldset> <fieldset>
-            <div className="form-group">
-                <label>Address:
-                    <input 
-                        className="form-control"
-                        type="text"
-                        onChange={(event)=>{
-                            const newAddress=event.target.value;
-                            setAddress(newAddress)
-                        }}
-                    />
-                </label>
-            </div>
-        </fieldset>
-        <fieldset>
-            <div className="form-group">
-                <label>City:
-                    <input 
-                        className="form-control"
-                        type="text"
-                        onChange={(event)=>{
-                            const newCity=event.target.value;
-                            setCity(newCity)
-                        }}
-                    />
-                </label>
-            </div>
-        </fieldset>
-        <fieldset>
-            <div className="form-group">
-                <label>State:
-            <select
-                value={selectedState}
-                onChange={(event)=>setSelectedState(event.target.value)}>
-                    <option value="Select a State">Select State</option>
-                    {states.map((state)=>(
-                        <option key={state.id} value={state.id}>
-                            {state.state_name}
-                        </option>
-                    )
-                    )}
-                </select></label></div>
-        </fieldset>
-        <fieldset>
-            <div className="form-group">
-                <label>Date:
-                    <input 
-                        className="form-control"
-                        type="text"
-                        onChange={(event)=>{
-                            const newDate=event.target.value;
-                            setDate(newDate)
-                        }}
-                    />
-                </label>
-            </div>
-        </fieldset>
-        <fieldset>
-            <div className="form-group">
-                <label>Price:
-                    <input 
-                        className="form-control"
-                        type="text"
-                        onChange={(event)=>{
-                            const newPrice=event.target.value;
-                            setPrice(newPrice)
-                        }}
-                    />
-                </label>
-            </div>
-        </fieldset>
-        <fieldset>
-            <div className="form-group">
-                <label>Age Group:
-            <select
-                value={selectedAge}
-                onChange={(event)=>setSelectedAge(event.target.value)}>
-                    <option value="Select Age">Select Age</option>
-                    {allAges.map((age)=>(
-                        <option key={age.id} value={age.id}>
-                            {age.name}
-                        </option>
-                    )
-                    )}
-                </select></label></div>
-        </fieldset>
-        <fieldset>
-            <div className="form-group">
-                <label>Description:
-                    <input 
-                        className="form-control"
-                        type="text"
-                        onChange={(event)=>{
-                            const newDescription=event.target.value;
-                            setDescription(newDescription)
-                        }}
-                    />
-                </label>
-            </div>
-        </fieldset>
-        <fieldset>
-            <div className="form-group">
-                <label>Dance Type:
-            <select
-                value={selectedDanceType}
-                onChange={(event)=>setSelectedDanceType(event.target.value)}>
-                    <option value="Select a Dance Type">Select Dance Type</option>
-                    {allDanceTypes.map((dance)=>(
-                        <option key={dance.id} value={dance.id}>
-                            {dance.type}
-                        </option>
-                    )
-                    )}
-                </select></label></div>
-        </fieldset>
-        <fieldset>
-            <div className="form-group">
-                <button className="form-btn btn-primary" onClick={handleSaveEvent}>
-                    Save Event
-                </button>
-            </div>
-        </fieldset>
+          );
+        })}
+      </fieldset>
+      <fieldset>
+        <button
+          type="button"
+          className="form-btn btn-primary"
+          onClick={handleSaveEvent}
+        >
+          Save Event
+        </button>
+      </fieldset>
     </form>
-  )
+  );
 };

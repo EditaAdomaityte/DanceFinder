@@ -1,15 +1,32 @@
+
+
+body { 
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1504609813442-a8924e83f76e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size:cover;  /* This ensures the image covers the whole page */
+  background-position: center;  /* Centers the image */
+  background-repeat: no-repeat;
+}
+
+
 .container-login {
   text-align: center;
 }
 
 .container-login > section > a {
   text-decoration: underline;
-  color: var(--secondary);
+  color: rgb(255, 255, 255);
+}
+
+.container-register > section > a {
+  text-decoration: underline;
+  color: rgb(255, 255, 255);
 }
 
 .form-login {
   width: 60%;
   margin: 2rem auto;
+  background-color: rgba(255, 255, 255, 0.795);
 }
 
 .form-login > h1 {
@@ -20,6 +37,8 @@
 .form-login > h2 {
   text-align: center;
   font-size: 1.5rem;
+ 
+  color: black;
 }
 
 .form-login > fieldset > input[type="email"] {
@@ -43,7 +62,7 @@ form {
   border: 1px solid var(--outline);
   border-radius: 10px;
   padding: 1rem 0rem 0rem 1rem;
-  box-shadow: 1px 2px 5px lightgray;
+  box-shadow: 1px 2px 5px rgb(180, 140, 140);
   background-color: var(--offWhite);
 }
 
@@ -76,4 +95,10 @@ fieldset {
   box-shadow: none;
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+input{
+  border: 1rem;
+  border-color: black;
+  background-color: rgb(220, 215, 217);
 }

@@ -1,17 +1,27 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import "./Login.css"
 import { createUser, getUserByEmail } from "../../services/userService"
+import { getAllStates } from "../../services/extraServices"
 
 export const Register = (props) => {
   const [user, setUser] = useState({
     email: "",
     name: "",
-    state: "",
+    stateId: 0,
     city: "",
     isOrganizer: false,
 
   })
+  const [states, setAllStates] = useState([]);
+
+
+useEffect(() => {
+    getAllStates().then((stateArray) => {
+      setAllStates(stateArray);
+    });
+  }, []);
+
   let navigate = useNavigate()
 
   const registerNewUser = () => {
@@ -45,17 +55,24 @@ export const Register = (props) => {
 
   const updateUser = (evt) => {
     const copy = { ...user }
-    copy[evt.target.id] = evt.target.value
+
+    //covernt to number if it is state select field:
+    if(evt.target.id ==="stateId"){
+      copy[evt.target.id]=parseInt(evt.target.value)
+    }else{
+    copy[evt.target.id] = evt.target.value}
     setUser(copy)
   }
 
   return (
-    <main style={{ textAlign: "center" }}>
+   
+    <main className="container-register" style={{ textAlign: "center" }}><section>
       <form className="form-login" onSubmit={handleRegister}>
         <h1>💃Dance Finder🕺</h1>
         <h2>Please Register</h2>
+        <div className="form-group">
         <fieldset>
-          <div className="form-group">
+          
             <input
               onChange={updateUser}
               type="text"
@@ -65,10 +82,8 @@ export const Register = (props) => {
               required
               autoFocus
             />
-          </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
             <input
               onChange={updateUser}
               type="text"
@@ -78,23 +93,8 @@ export const Register = (props) => {
               required
               autoFocus
             />
-          </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
-            <input
-              onChange={updateUser}
-              type="text"
-              id="state"
-              className="form-control"
-              placeholder="Enter your State"
-              required
-              autoFocus
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
             <input
               onChange={updateUser}
               type="email"
@@ -103,10 +103,26 @@ export const Register = (props) => {
               placeholder="Email address"
               required
             />
-          </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
+                <label>
+            <select
+                
+                id="stateId"
+                onChange={updateUser}>
+                    <option value="Select a State">Select State</option>
+                    {states.map((state)=>(
+                        <option key={state.id} value={state.id}>
+                            {state.state_name}
+                        </option>
+                    )
+                    )}
+                </select></label>
+        </fieldset>
+        {}
+       
+        <fieldset>
+          
             <label>
               <input
                 onChange={(evt) => {
@@ -119,16 +135,20 @@ export const Register = (props) => {
               />
               I am an organizer{" "}
             </label>
-          </div>
-        </fieldset>
+          
+        </fieldset></div>
         <fieldset>
-          <div className="form-group">
-            <button className="login-btn btn-info" type="submit">
+          
+            <button className="btn btn-primary" type="submit">
               Register
             </button>
-          </div>
+          
         </fieldset>
       </form>
+       </section>
+       <section>
+        <Link to="/login">Go back to Log In Page!</Link>
+      </section>
     </main>
   )
 }

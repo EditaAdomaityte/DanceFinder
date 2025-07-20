@@ -4,12 +4,14 @@ import "./NavBar.css"
 
 export const NavBar=({currentUser})=>{
     const navigate=useNavigate()
-    console.log(currentUser)
 
     return(
     <ul className="navbar">
         <li className="navbar-item">
             <Link to="/events">All Events</Link>
+        </li>
+        <li className="navbar-item">
+            <Link to="/eventmap">Event Map</Link>
         </li>
         <li className="navbar-item">
             <Link to="/events/myevents">My Events</Link>
